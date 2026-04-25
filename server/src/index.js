@@ -83,12 +83,20 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 const start = async () => {
-  await connectDB();
-  app.listen(PORT, () => {
-    console.log(`🚀  API running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);
-  });
+  try {
+    await connectDB();
+    console.log("✅ MongoDB connected");
+
+    app.listen(PORT, () => {
+      console.log(`🚀 API running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("❌ Server failed to start:", err.message);
+    process.exit(1);
+  }
 };
 
 start();
+
 
 export default app;
