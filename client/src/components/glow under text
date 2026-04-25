@@ -1,0 +1,53 @@
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const MinimalUnderline = () => {
+  const containerRef = useRef(null);
+  const lineRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Simple one-shot animation
+      gsap.fromTo(
+        lineRef.current,
+        { scaleX: 0, transformOrigin: "left center" },
+        {
+          scaleX: 1,
+          duration: 1.2,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={containerRef}
+      className="min-h-screen flex items-center justify-center bg-black"
+    >
+      <h1 className="text-5xl md:text-7xl font-medium text-center text-white px-4">
+        Modern{" "}
+        <span className="relative inline-block">
+          <span>website</span>
+          <div
+            ref={lineRef}
+            className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"
+          />
+        </span>{" "}
+        design
+      </h1>
+    </section>
+  );
+};
+
+export default MinimalUnderline;

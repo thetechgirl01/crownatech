@@ -1,0 +1,22 @@
+{
+  "name": "joyceofweb",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CrownaTech / JoyceOfWeb — full MERN stack agency website (client + server).",
+  "scripts": {
+    "install:all": "npm install --prefix client && npm install --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "dev": "concurrently -n client,server -c blue,green \"npm:dev:client\" \"npm:dev:server\"",
+    "build": "npm run build --prefix client",
+    "start": "npm start --prefix server",
+    "seed:admin": "npm run seed --prefix server",
+    "lint:client": "npm run lint --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}

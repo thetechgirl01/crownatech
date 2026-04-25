@@ -1,0 +1,1192 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Flip } from 'gsap/Flip';
+
+// Register GSAP plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, Flip);
+}
+
+const PhotographyWebsite = () => {
+  // Refs
+  const heroRef = useRef(null);
+  const cameraRef = useRef(null);
+  const galleryRef = useRef(null);
+  const projectsRef = useRef([]);
+  const apertureRef = useRef(null);
+  const lightBeamRef = useRef(null);
+  
+  // Photo refs
+  const photoRefs = useRef([]);
+  const polaroidRefs = useRef([]);
+  const filterButtonsRef = useRef([]);
+  
+  // State
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeProject, setActiveProject] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  // Photography categories
+  const categories = [
+    { id: 'portrait', name: 'Portrait', color: '#FF9F68', icon: '👤' },
+    { id: 'landscape', name: 'Landscape', color: '#68FF9F', icon: '🏔️' },
+    { id: 'street', name: 'Street', color: '#9F68FF', icon: '🏙️' },
+    { id: 'fashion', name: 'Fashion', color: '#FF68D7', icon: '👗' },
+    { id: 'wildlife', name: 'Wildlife', color: '#68D7FF', icon: '🦁' }
+  ];
+
+  // Gallery photos with categories
+  const galleryPhotos = [
+    { id: 1, category: 'portrait', title: 'Urban Portrait', color: '#FF9F68', aspect: 'vertical' },
+    { id: 2, category: 'landscape', title: 'Mountain Dawn', color: '#68FF9F', aspect: 'horizontal' },
+    { id: 3, category: 'street', title: 'City Rhythm', color: '#9F68FF', aspect: 'vertical' },
+    { id: 4, category: 'fashion', title: 'Runway Elegance', color: '#FF68D7', aspect: 'horizontal' },
+    { id: 5, category: 'wildlife', title: 'Savanna King', color: '#68D7FF', aspect: 'vertical' },
+    { id: 6, category: 'portrait', title: 'Golden Hour', color: '#FF9F68', aspect: 'horizontal' },
+    { id: 7, category: 'landscape', title: 'Ocean Cliffs', color: '#68FF9F', aspect: 'vertical' },
+    { id: 8, category: 'street', title: 'Night Lights', color: '#9F68FF', aspect: 'horizontal' },
+    { id: 9, category: 'fashion', title: 'Editorial', color: '#FF68D7', aspect: 'vertical' },
+    { id: 10, category: 'wildlife', title: 'Forest Guardian', color: '#68D7FF', aspect: 'horizontal' }
+  ];
+
+  // Projects data
+  const projects = [
+    {
+      id: 1,
+      title: 'Urban Stories',
+      description: 'Documenting city life through raw, emotional portraits',
+      color: '#FF9F68',
+      year: '2024'
+    },
+    {
+      id: 2,
+      title: 'Wild Horizons',
+      description: 'Capturing untamed nature in remote locations',
+      color: '#68FF9F',
+      year: '2023'
+    },
+    {
+      id: 3,
+      title: 'Fashion Forward',
+      description: 'Editorial work for leading fashion houses',
+      color: '#FF68D7',
+      year: '2024'
+    }
+  ];
+
+  // Initialize refs
+  photoRefs.current = [];
+  polaroidRefs.current = [];
+  filterButtonsRef.current = [];
+  projectsRef.current = [];
+
+  // Add to refs functions
+  const addPhotoRef = (el) => el && photoRefs.current.push(el);
+  const addPolaroidRef = (el) => el && polaroidRefs.current.push(el);
+  const addFilterButtonRef = (el) => el && filterButtonsRef.current.push(el);
+  const addProjectRef = (el) => el && projectsRef.current.push(el);
+
+  // Handle mouse move for parallax
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    // ============================================
+    // PART 1: PRELOADER ANIMATION
+    // ============================================
+    
+    const preloader = gsap.timeline({
+      onComplete: () => {
+        setIsLoading(false);
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Camera aperture opening effect
+    preloader.to(apertureRef.current, {
+      scale: 50,
+      rotate: 360,
+      duration: 2,
+      ease: "power4.inOut"
+    })
+    .to(".loading-text", {
+      text: "FOCUSING...",
+      duration: 1,
+      ease: "none"
+    }, "-=1")
+    .to(".loading-progress", {
+      width: "100%",
+      duration: 2,
+      ease: "power2.inOut"
+    })
+    .to(apertureRef.current, {
+      opacity: 0,
+      duration: 0.5
+    })
+    .to(".preloader", {
+      opacity: 0,
+      duration: 0.5,
+      onComplete: () => {
+        document.querySelector('.preloader').style.display = 'none';
+      }
+    });
+
+    // ============================================
+    // PART 2: HERO SECTION - REVERSE SCROLL EFFECTS
+    // ============================================
+    
+    // Hero title split and animate
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+      const text = heroTitle.textContent;
+      heroTitle.innerHTML = text.split('').map(char => 
+        `<span class="char">${char === ' ' ? '&nbsp;' : char}</span>`
+      ).join('');
+      
+      gsap.fromTo(".char",
+        { y: 100, opacity: 0, rotateX: 90 },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 1,
+          stagger: 0.03,
+          ease: "back.out(1.2)",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top 80%",
+            toggleActions: "play reverse play reverse"
+          }
+        }
+      );
+    }
+
+    // Camera rotation on scroll (reverses)
+    gsap.to(cameraRef.current, {
+      rotation: 360,
+      ease: "none",
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: "top top",
+        end: "bottom center",
+        scrub: true,
+        toggleActions: "play reverse play reverse"
+      }
+    });
+
+    // Light beam animation (reverses)
+    gsap.fromTo(lightBeamRef.current,
+      { scaleY: 0, opacity: 0 },
+      {
+        scaleY: 1,
+        opacity: 0.3,
+        duration: 2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top 60%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+    // ============================================
+    // PART 3: GALLERY - MASONRY WITH REVERSE EFFECTS
+    // ============================================
+    
+    // Photo reveal animation (reverses on scroll up)
+    photoRefs.current.forEach((photo, i) => {
+      const delay = i * 0.1;
+      
+      gsap.fromTo(photo,
+        {
+          scale: 0.8,
+          opacity: 0,
+          y: 50,
+          rotation: -5
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          rotation: 0,
+          duration: 0.8,
+          delay: delay,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: galleryRef.current,
+            start: "top 80%",
+            toggleActions: "play reverse play reverse",
+            once: false // Allow multiple triggers
+          }
+        }
+      );
+
+      // Hover effect
+      photo.addEventListener('mouseenter', () => {
+        gsap.to(photo, {
+          scale: 1.05,
+          zIndex: 10,
+          duration: 0.3,
+          boxShadow: '0 20px 40px rgba(0,0,0,0.3)'
+        });
+        
+        // Color overlay
+        const overlay = photo.querySelector('.photo-overlay');
+        if (overlay) {
+          gsap.to(overlay, {
+            opacity: 0.7,
+            duration: 0.3
+          });
+        }
+      });
+
+      photo.addEventListener('mouseleave', () => {
+        gsap.to(photo, {
+          scale: 1,
+          zIndex: 1,
+          duration: 0.3,
+          boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
+        });
+        
+        const overlay = photo.querySelector('.photo-overlay');
+        if (overlay) {
+          gsap.to(overlay, {
+            opacity: 0,
+            duration: 0.3
+          });
+        }
+      });
+    });
+
+    // ============================================
+    // PART 4: FILTER BUTTONS - COLORFUL INTERACTIONS
+    // ============================================
+    
+    filterButtonsRef.current.forEach((button, i) => {
+      // Initial state
+      gsap.set(button, {
+        backgroundColor: 'transparent',
+        color: '#fff'
+      });
+
+      // Hover animation
+      button.addEventListener('mouseenter', () => {
+        gsap.to(button, {
+          backgroundColor: categories[i].color,
+          color: '#000',
+          duration: 0.3,
+          ease: "power2.out"
+        });
+        
+        gsap.to(button.querySelector('.filter-icon'), {
+          scale: 1.2,
+          rotation: 360,
+          duration: 0.5
+        });
+      });
+
+      button.addEventListener('mouseleave', () => {
+        if (activeFilter !== categories[i].id) {
+          gsap.to(button, {
+            backgroundColor: 'transparent',
+            color: '#fff',
+            duration: 0.3
+          });
+        }
+        
+        gsap.to(button.querySelector('.filter-icon'), {
+          scale: 1,
+          rotation: 0,
+          duration: 0.3
+        });
+      });
+    });
+
+    // ============================================
+    // PART 5: POLAROID WALL - STAGGERED REVERSE EFFECTS
+    // ============================================
+    
+    gsap.fromTo(polaroidRefs.current,
+      {
+        y: 100,
+        opacity: 0,
+        rotation: -10
+      },
+      {
+        y: 0,
+        opacity: 1,
+        rotation: 0,
+        duration: 0.8,
+        stagger: {
+          amount: 1,
+          from: "random"
+        },
+        ease: "back.out(1.2)",
+        scrollTrigger: {
+          trigger: ".polaroid-wall",
+          start: "top 80%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+    // Polaroid hover effects
+    polaroidRefs.current.forEach(polaroid => {
+      polaroid.addEventListener('mouseenter', () => {
+        gsap.to(polaroid, {
+          y: -20,
+          rotation: 0,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+
+      polaroid.addEventListener('mouseleave', () => {
+        gsap.to(polaroid, {
+          y: 0,
+          rotation: gsap.utils.random(-5, 5),
+          duration: 0.3
+        });
+      });
+    });
+
+    // ============================================
+    // PART 6: PROJECTS SECTION - FLIP ANIMATIONS
+    // ============================================
+    
+    projectsRef.current.forEach((project, i) => {
+      // Initial animation
+      gsap.fromTo(project,
+        {
+          x: i % 2 === 0 ? -100 : 100,
+          opacity: 0
+        },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          delay: i * 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".projects-section",
+            start: "top 70%",
+            toggleActions: "play reverse play reverse"
+          }
+        }
+      );
+
+      // Hover expansion
+      project.addEventListener('mouseenter', () => {
+        const state = Flip.getState(project);
+        project.style.zIndex = '10';
+        
+        Flip.to(state, {
+          duration: 0.5,
+          ease: "power2.out",
+          scale: 1.05,
+          onComplete: () => {
+            gsap.to(project.querySelector('.project-overlay'), {
+              opacity: 0.9,
+              duration: 0.3
+            });
+          }
+        });
+      });
+
+      project.addEventListener('mouseleave', () => {
+        const state = Flip.getState(project);
+        project.style.zIndex = '1';
+        
+        Flip.to(state, {
+          duration: 0.5,
+          ease: "power2.inOut",
+          scale: 1
+        });
+        
+        gsap.to(project.querySelector('.project-overlay'), {
+          opacity: 0.3,
+          duration: 0.3
+        });
+      });
+    });
+
+    // ============================================
+    // PART 7: ABOUT SECTION - TEXT REVEAL (REVERSES)
+    // ============================================
+    
+    // Split text into spans
+    const aboutText = document.querySelector('.about-text');
+    if (aboutText) {
+      const words = aboutText.textContent.split(' ');
+      aboutText.innerHTML = words.map(word => 
+        `<span class="word">${word}</span>`
+      ).join(' ');
+      
+      gsap.fromTo(".word",
+        {
+          y: 50,
+          opacity: 0,
+          filter: "blur(10px)"
+        },
+        {
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.5,
+          stagger: 0.05,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-section",
+            start: "top 80%",
+            toggleActions: "play reverse play reverse"
+          }
+        }
+      );
+    }
+
+    // ============================================
+    // PART 8: CONTACT FORM - STAGGERED INPUTS
+    // ============================================
+    
+    gsap.fromTo(".form-input",
+      {
+        x: -50,
+        opacity: 0
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".contact-section",
+          start: "top 80%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+    // ============================================
+    // PART 9: FOOTER - SLIDE UP EFFECT
+    // ============================================
+    
+    gsap.fromTo(".footer-content",
+      {
+        y: 100,
+        opacity: 0
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "footer",
+          start: "top 90%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+    // ============================================
+    // PART 10: PARALLAX ON MOUSE MOVE
+    // ============================================
+    
+    const parallaxElements = document.querySelectorAll('.parallax-layer');
+    parallaxElements.forEach((layer, i) => {
+      const depth = (i + 1) * 0.05;
+      layer.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 20 * depth;
+        const y = (e.clientY / window.innerHeight - 0.5) * 20 * depth;
+        gsap.to(layer, {
+          x: x,
+          y: y,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+    });
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      gsap.killTweensOf("*");
+    };
+  }, [activeFilter]);
+
+  // Filter gallery
+  const handleFilter = (categoryId) => {
+    setActiveFilter(categoryId);
+    
+    // Animate filter button
+    filterButtonsRef.current.forEach((button, i) => {
+      if (categories[i].id === categoryId) {
+        gsap.to(button, {
+          backgroundColor: categories[i].color,
+          color: '#000',
+          duration: 0.3
+        });
+      } else {
+        gsap.to(button, {
+          backgroundColor: 'transparent',
+          color: '#fff',
+          duration: 0.3
+        });
+      }
+    });
+
+    // Filter gallery with animation
+    photoRefs.current.forEach((photo, i) => {
+      const photoCategory = galleryPhotos[i]?.category;
+      if (categoryId === 'all' || photoCategory === categoryId) {
+        gsap.to(photo, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          display: 'block'
+        });
+      } else {
+        gsap.to(photo, {
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.5,
+          display: 'none'
+        });
+      }
+    });
+  };
+
+  // Open project details
+  const openProject = (project) => {
+    setActiveProject(project);
+    
+    // Create project detail modal
+    const modal = document.createElement('div');
+    modal.className = 'project-modal';
+    modal.innerHTML = `
+      <div class="modal-content">
+        <h2>${project.title}</h2>
+        <p>${project.description}</p>
+        <button onclick="this.parentElement.parentElement.remove()">Close</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    
+    gsap.fromTo(modal, {
+      opacity: 0,
+      scale: 0.8
+    }, {
+      opacity: 1,
+      scale: 1,
+      duration: 0.5,
+      ease: "back.out(1.2)"
+    });
+  };
+
+  return (
+    <div className="photography-website" style={{ cursor: 'none' }}>
+      {/* Custom Cursor */}
+      <div className="custom-cursor" style={{
+        position: 'fixed',
+        width: '40px',
+        height: '40px',
+        border: `2px solid ${categories[0].color}`,
+        borderRadius: '50%',
+        pointerEvents: 'none',
+        zIndex: 9999,
+        mixBlendMode: 'difference',
+        left: -20,
+        top: -20,
+        transform: `translate(${mousePos.x}px, ${mousePos.y}px)`
+      }} />
+      
+      {/* Preloader */}
+      <div className="preloader" style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: '#000',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 99999
+      }}>
+        <div ref={apertureRef} style={{
+          width: '20px',
+          height: '20px',
+          background: '#fff',
+          borderRadius: '50%',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            background: 'conic-gradient(#000 0deg 90deg, #fff 90deg 180deg, #000 180deg 270deg, #fff 270deg 360deg)'
+          }} />
+        </div>
+        <div className="loading-text" style={{
+          color: '#fff',
+          marginTop: '20px',
+          fontSize: '14px',
+          letterSpacing: '2px'
+        }}>LOADING</div>
+        <div style={{
+          width: '200px',
+          height: '2px',
+          background: 'rgba(255,255,255,0.1)',
+          marginTop: '20px',
+          overflow: 'hidden'
+        }}>
+          <div className="loading-progress" style={{
+            width: '0%',
+            height: '100%',
+            background: '#fff'
+          }} />
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <section ref={heroRef} style={{
+        height: '100vh',
+        background: 'radial-gradient(circle at 20% 50%, #1a1a2e 0%, #0f0f23 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        {/* Camera Model */}
+        <div ref={cameraRef} style={{
+          position: 'absolute',
+          right: '10%',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          fontSize: '100px'
+        }}>
+          📷
+        </div>
+
+        {/* Light Beam */}
+        <div ref={lightBeamRef} style={{
+          position: 'absolute',
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '2px',
+          height: '100%',
+          background: 'linear-gradient(to bottom, transparent, #fff, transparent)',
+          opacity: 0,
+          transformOrigin: 'center top'
+        }} />
+
+        {/* Hero Content */}
+        <div className="parallax-layer" style={{
+          textAlign: 'center',
+          zIndex: 10,
+          transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.5}px)`
+        }}>
+          <h1 className="hero-title" style={{
+            fontSize: 'clamp(3rem, 10vw, 8rem)',
+            fontWeight: '300',
+            color: 'white',
+            marginBottom: '20px',
+            fontFamily: 'serif',
+            letterSpacing: '-2px'
+          }}>
+            FRAME THE MOMENT
+          </h1>
+          <p style={{
+            fontSize: '1.2rem',
+            color: 'rgba(255, 255, 255, 0.7)',
+            maxWidth: '600px',
+            margin: '0 auto 40px',
+            fontFamily: 'sans-serif'
+          }}>
+            Capturing life's most beautiful stories through the lens
+          </p>
+          <button style={{
+            padding: '15px 40px',
+            background: 'linear-gradient(45deg, #FF9F68, #68FF9F)',
+            border: 'none',
+            color: '#000',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            borderRadius: '30px',
+            cursor: 'pointer',
+            letterSpacing: '1px'
+          }}>
+            VIEW PORTFOLIO
+          </button>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div style={{
+          position: 'absolute',
+          bottom: '40px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          color: 'white',
+          textAlign: 'center',
+          opacity: 0.5
+        }}>
+          <div style={{ fontSize: '12px', letterSpacing: '2px', marginBottom: '10px' }}>
+            SCROLL TO EXPLORE
+          </div>
+          <div style={{ 
+            fontSize: '20px',
+            animation: 'bounce 2s infinite',
+            transform: `translateY(${mousePos.y * 0.5}px)`
+          }}>↓</div>
+        </div>
+      </section>
+
+      {/* Gallery Filter */}
+      <div style={{
+        padding: '40px 20px',
+        background: '#0f0f23',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '20px',
+          flexWrap: 'wrap',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          <button
+            ref={el => addFilterButtonRef(el)}
+            onClick={() => handleFilter('all')}
+            style={{
+              padding: '10px 25px',
+              border: `2px solid ${activeFilter === 'all' ? '#fff' : 'rgba(255,255,255,0.3)'}`,
+              background: activeFilter === 'all' ? '#fff' : 'transparent',
+              color: activeFilter === 'all' ? '#000' : '#fff',
+              borderRadius: '25px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              transition: 'all 0.3s'
+            }}
+          >
+            ALL WORK
+          </button>
+          {categories.map((category, i) => (
+            <button
+              key={category.id}
+              ref={el => addFilterButtonRef(el)}
+              onClick={() => handleFilter(category.id)}
+              style={{
+                padding: '10px 25px',
+                border: `2px solid ${activeFilter === category.id ? category.color : 'rgba(255,255,255,0.3)'}`,
+                background: activeFilter === category.id ? category.color : 'transparent',
+                color: activeFilter === category.id ? '#000' : '#fff',
+                borderRadius: '25px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              <span className="filter-icon">{category.icon}</span>
+              {category.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Gallery Section */}
+      <section ref={galleryRef} style={{
+        padding: '40px 20px',
+        background: '#0a0a1a',
+        minHeight: '100vh'
+      }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: '20px',
+          maxWidth: '1400px',
+          margin: '0 auto'
+        }}>
+          {galleryPhotos.map((photo, i) => (
+            <div
+              key={photo.id}
+              ref={addPhotoRef}
+              style={{
+                background: photo.color,
+                borderRadius: '10px',
+                overflow: 'hidden',
+                position: 'relative',
+                height: photo.aspect === 'vertical' ? '500px' : '300px',
+                gridColumn: photo.aspect === 'horizontal' ? 'span 2' : 'span 1',
+                cursor: 'pointer',
+                transform: 'scale(0.8)',
+                opacity: 0
+              }}
+              className="parallax-layer"
+            >
+              <div className="photo-overlay" style={{
+                position: 'absolute',
+                inset: 0,
+                background: `linear-gradient(to top, ${photo.color}, transparent)`,
+                opacity: 0,
+                display: 'flex',
+                alignItems: 'flex-end',
+                padding: '20px'
+              }}>
+                <h3 style={{ color: '#fff', fontSize: '24px', margin: 0 }}>
+                  {photo.title}
+                </h3>
+              </div>
+              <div style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '48px',
+                opacity: 0.3
+              }}>
+                {categories.find(c => c.id === photo.category)?.icon}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Polaroid Wall */}
+      <section className="polaroid-wall" style={{
+        padding: '100px 20px',
+        background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+        minHeight: '100vh'
+      }}>
+        <h2 style={{
+          textAlign: 'center',
+          color: '#fff',
+          fontSize: '3rem',
+          marginBottom: '60px',
+          fontFamily: 'serif'
+        }}>
+          BEHIND THE SCENES
+        </h2>
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '30px',
+          justifyContent: 'center',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+            <div
+              key={i}
+              ref={addPolaroidRef}
+              style={{
+                width: '250px',
+                height: '300px',
+                background: '#fff',
+                padding: '15px',
+                borderRadius: '5px',
+                transform: `rotate(${gsap.utils.random(-10, 10)}deg)`,
+                boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+                cursor: 'pointer'
+              }}
+            >
+              <div style={{
+                width: '100%',
+                height: '200px',
+                background: categories[i % categories.length].color,
+                marginBottom: '15px'
+              }} />
+              <p style={{
+                color: '#000',
+                fontSize: '14px',
+                fontFamily: 'cursive',
+                margin: 0
+              }}>
+                Memory #{i}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section className="projects-section" style={{
+        padding: '100px 20px',
+        background: '#0f0f23'
+      }}>
+        <h2 style={{
+          textAlign: 'center',
+          color: '#fff',
+          fontSize: '3rem',
+          marginBottom: '60px',
+          fontFamily: 'serif'
+        }}>
+          FEATURED PROJECTS
+        </h2>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '40px',
+          maxWidth: '1000px',
+          margin: '0 auto'
+        }}>
+          {projects.map((project, i) => (
+            <div
+              key={project.id}
+              ref={addProjectRef}
+              onClick={() => openProject(project)}
+              style={{
+                background: project.color,
+                padding: '60px',
+                borderRadius: '20px',
+                cursor: 'pointer',
+                position: 'relative',
+                overflow: 'hidden',
+                opacity: 0
+              }}
+            >
+              <div className="project-overlay" style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(0,0,0,0.3)',
+                opacity: 0.3,
+                transition: 'opacity 0.3s'
+              }} />
+              <h3 style={{
+                color: '#000',
+                fontSize: '2.5rem',
+                marginBottom: '10px',
+                position: 'relative',
+                zIndex: 2
+              }}>
+                {project.title}
+              </h3>
+              <p style={{
+                color: '#000',
+                fontSize: '1.2rem',
+                marginBottom: '20px',
+                position: 'relative',
+                zIndex: 2
+              }}>
+                {project.description}
+              </p>
+              <div style={{
+                color: '#000',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                position: 'relative',
+                zIndex: 2
+              }}>
+                {project.year}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="about-section" style={{
+        padding: '100px 20px',
+        background: 'linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%)',
+        color: '#fff'
+      }}>
+        <div style={{
+          maxWidth: '800px',
+          margin: '0 auto',
+          textAlign: 'center'
+        }}>
+          <h2 style={{ fontSize: '3rem', marginBottom: '40px', fontFamily: 'serif' }}>
+            ABOUT THE ARTIST
+          </h2>
+          <p className="about-text" style={{
+            fontSize: '1.2rem',
+            lineHeight: '1.8',
+            color: 'rgba(255, 255, 255, 0.8)',
+            marginBottom: '40px'
+          }}>
+            With over a decade of experience capturing moments that tell stories, 
+            my photography focuses on authenticity and emotion. Each frame is a 
+            carefully composed narrative, blending technical precision with artistic 
+            vision to create timeless imagery.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="contact-section" style={{
+        padding: '100px 20px',
+        background: '#1a1a2e',
+        color: '#fff'
+      }}>
+        <div style={{
+          maxWidth: '600px',
+          margin: '0 auto',
+          textAlign: 'center'
+        }}>
+          <h2 style={{ fontSize: '3rem', marginBottom: '40px', fontFamily: 'serif' }}>
+            LET'S CREATE
+          </h2>
+          <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <input
+              type="text"
+              placeholder="Your Name"
+              className="form-input"
+              style={{
+                padding: '15px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: 'none',
+                borderRadius: '10px',
+                color: 'white',
+                fontSize: '16px',
+                opacity: 0
+              }}
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              className="form-input"
+              style={{
+                padding: '15px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: 'none',
+                borderRadius: '10px',
+                color: 'white',
+                fontSize: '16px',
+                opacity: 0
+              }}
+            />
+            <textarea
+              placeholder="Your Vision"
+              rows="5"
+              className="form-input"
+              style={{
+                padding: '15px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: 'none',
+                borderRadius: '10px',
+                color: 'white',
+                fontSize: '16px',
+                resize: 'vertical',
+                opacity: 0
+              }}
+            />
+            <button
+              type="submit"
+              style={{
+                padding: '15px 40px',
+                background: 'linear-gradient(45deg, #FF9F68, #68FF9F)',
+                border: 'none',
+                color: '#000',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                borderRadius: '30px',
+                cursor: 'pointer',
+                marginTop: '20px'
+              }}
+            >
+              SEND MESSAGE
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{
+        padding: '60px 20px',
+        background: '#0a0a1a',
+        color: 'rgba(255, 255, 255, 0.5)',
+        textAlign: 'center'
+      }}>
+        <div className="footer-content">
+          <div style={{ fontSize: '2rem', marginBottom: '20px', color: '#fff' }}>
+            📸
+          </div>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '30px',
+            marginBottom: '30px',
+            flexWrap: 'wrap'
+          }}>
+            {categories.map(cat => (
+              <span key={cat.id} style={{ color: cat.color, cursor: 'pointer' }}>
+                {cat.name}
+              </span>
+            ))}
+          </div>
+          <p style={{ fontSize: '14px', letterSpacing: '1px' }}>
+            © 2024 Frame the Moment Photography. All images copyrighted.
+          </p>
+        </div>
+      </footer>
+
+      {/* Add CSS animations */}
+      <style jsx>{`
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        .project-modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0,0,0,0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10000;
+          backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+          background: #1a1a2e;
+          padding: 40px;
+          border-radius: 20px;
+          max-width: 600px;
+          width: 90%;
+          color: white;
+        }
+        
+        @media (max-width: 768px) {
+          .hero-title .char {
+            display: inline-block;
+          }
+          
+          .polaroid-wall > div {
+            width: 150px !important;
+            height: 200px !important;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default PhotographyWebsite;
