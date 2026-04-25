@@ -16,21 +16,6 @@ import uploadRoutes from './routes/uploadRoutes.js';
 
 const app = express();
 
-// ---------- Security & basics ----------
-app.set('trust proxy', 1);
-
-app.use(
-  helmet({
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-  })
-);
-
-// ---------- CORS FIX ----------
-const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
-  .split(',')
-  .map((s) => s.trim())
-  .filter(Boolean);
-
 app.use(
   cors({
     origin: (origin, cb) => {
@@ -47,6 +32,23 @@ app.use(
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   })
 );
+
+
+// ---------- Security & basics ----------
+app.set('trust proxy', 1);
+
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
+
+// ---------- CORS FIX ----------
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+
 
 // ✅ VERY IMPORTANT: handle preflight requests
 app.options('*', cors());
