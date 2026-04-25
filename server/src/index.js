@@ -16,25 +16,36 @@ import uploadRoutes from './routes/uploadRoutes.js';
 
 const app = express();
 
-app.use(
-  cors({
-    origin: (origin, cb) => {
-      // allow requests with no origin (like Postman)
-      if (!origin) return cb(null, true);
+/* =========================
+   CORS (must come early)
+========================= */
 
-      if (allowedOrigins.includes(origin)) {
-        return cb(null, true);
-      }
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
 
-      return cb(new Error(`CORS: origin ${origin} not allowed`));
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  })
-);
+const corsOptions = {
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true);
 
+    if (allowedOrigins.includes(origin)) {
+      return cb(null, true);
+    }
 
-// ---------- Security & basics ----------
+    return cb(new Error(`CORS: origin ${origin} not allowed`));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
+/* =========================
+   Security & Middleware
+========================= */
+
 app.set('trust proxy', 1);
 
 app.use(
@@ -43,43 +54,31 @@ app.use(
   })
 );
 
-// ---------- CORS FIX ----------
-const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
-  .split(',')
-  .map((s) => s.trim())
-  .filter(Boolean);
-
-
-// ✅ VERY IMPORTANT: handle preflight requests
-app.options('*', cors());
-
-// ---------- Body parsing ----------
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 
-// ---------- Logging ----------
 if (process.env.NODE_ENV !== 'test') {
-  app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+  app.use(morgan('dev'));
 }
 
-// ---------- Rate limiting ----------
+/* =========================
+   Rate Limiting
+========================= */
+
 app.use(
   '/api/auth',
   rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 30,
-    standardHeaders: true,
-    legacyHeaders: false,
-    message: {
-      success: false,
-      message: 'Too many login attempts. Please wait a few minutes.',
-    },
   })
 );
 
-// ---------- Routes ----------
+/* =========================
+   Routes
+========================= */
+
 app.get('/api/health', (req, res) =>
-  res.json({ success: true, status: 'ok', time: new Date().toISOString() })
+  res.json({ success: true, status: 'ok' })
 );
 
 app.use('/api/auth', authRoutes);
@@ -88,27 +87,23 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/uploads', uploadRoutes);
 
-// ---------- 404 + errors ----------
+/* =========================
+   Errors
+========================= */
+
 app.use(notFound);
 app.use(errorHandler);
 
-// ---------- Boot ----------
+/* =========================
+   Start server
+========================= */
+
 const PORT = process.env.PORT || 5000;
 
-const start = async () => {
-  try {
-    await connectDB();
-    console.log("✅ MongoDB connected");
-
-    app.listen(PORT, () => {
-      console.log(`🚀 API running on port ${PORT}`);
-    });
-  } catch (err) {
-    console.error("❌ Server failed to start:", err.message);
-    process.exit(1);
-  }
-};
-
-start();
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+});
 
 export default app;
