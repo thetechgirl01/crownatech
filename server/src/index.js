@@ -17,15 +17,15 @@ import uploadRoutes from './routes/uploadRoutes.js';
 const app = express();
 
 // ---------- Security & basics ----------
-app.set('trust proxy', 1); // correct req.ip behind a proxy (Render, Heroku, Nginx)
+app.set('trust proxy', 1);
 
 app.use(
   helmet({
-    crossOriginResourcePolicy: { policy: 'cross-origin' }, // lets the client consume our JSON
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
   })
 );
 
-// CORS — accept one or more origins from CLIENT_URL (comma-separated).
+// ---------- CORS FIX ----------
 const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
   .split(',')
   .map((s) => s.trim())
@@ -34,22 +34,33 @@ const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
 app.use(
   cors({
     origin: (origin, cb) => {
-      // Allow tools like curl/Postman (no Origin header), or whitelisted origins
-      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+      // allow requests with no origin (like Postman)
+      if (!origin) return cb(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return cb(null, true);
+      }
+
       return cb(new Error(`CORS: origin ${origin} not allowed`));
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   })
 );
 
+// ✅ VERY IMPORTANT: handle preflight requests
+app.options('*', cors());
+
+// ---------- Body parsing ----------
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 
+// ---------- Logging ----------
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 }
 
-// Global rate limiter — generous, acts as a brute-force backstop on /api/auth
+// ---------- Rate limiting ----------
 app.use(
   '/api/auth',
   rateLimit({
@@ -97,6 +108,5 @@ const start = async () => {
 };
 
 start();
-
 
 export default app;
