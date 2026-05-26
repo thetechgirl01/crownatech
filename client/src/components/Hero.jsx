@@ -68,7 +68,7 @@ export const Hero = () => {
   }, []);
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center">
+    <div className="min-h-[90vh] flex items-center justify-center">
       <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
         <div className="w-full">
           <div className="flex flex-col items-start space-y-6 md:space-y-8 text-left">
