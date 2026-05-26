@@ -203,35 +203,7 @@ const ServicesPage = () => {
                 {service.longDescription}
               </p>
 
-              <a
-                href={service.link}
-                className="
-                  group
-                  flex items-center justify-between
-                  w-2/4
-                  border border-white/20
-                  rounded-4xl
-                  px-3 py-2
-                  text-xs sm:text-sm
-                  hover:bg-white/10
-                  transition
-                "
-              >
-                <span className="text-white font-medium mx-auto">
-                  Read more
-                </span>
-
-                <span className="
-                  w-8 h-8
-                  bg-yellow-400
-                  rounded-full
-                  flex items-center justify-center
-                  group-hover:translate-x-1
-                  transition
-                ">
-                  <HiArrowRight className="text-black w-4 h-4 -rotate-45" />
-                </span>
-              </a>
+          
             </div>
           ))}
         </div>
@@ -239,5 +211,4 @@ const ServicesPage = () => {
     </div>
   );
 };
-
 export default ServicesPage;
