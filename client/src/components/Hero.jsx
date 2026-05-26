@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 export const Hero = () => {
   const techneikRef = useRef(null);
   const overlayRef = useRef(null);
+  const crownTechRef = useRef(null);
+  const underlineRef = useRef(null);
 
   // GSAP intro animation
   useEffect(() => {
@@ -22,16 +24,39 @@ export const Hero = () => {
       techneikRef.current.appendChild(overlay);
       overlayRef.current = overlay;
 
-      gsap.fromTo(
+      // Main title animation
+      const mainTimeline = gsap.timeline();
+      
+      mainTimeline.fromTo(
         techneikRef.current,
         { y: 60, opacity: 0 },
         { y: 0, opacity: 1, duration: 2.2, ease: 'power3.out' }
       );
 
-      gsap.fromTo(
+      mainTimeline.fromTo(
         overlay,
         { y: 0 },
-        { y: '-100%', duration: 2.2, ease: 'power3.out', delay: 0.1 }
+        { y: '-100%', duration: 2.2, ease: 'power3.out', delay: 0.1 },
+        "-=2.2"
+      );
+
+      // After main animation concludes, animate the CrownTech underline
+      mainTimeline.fromTo(
+        underlineRef.current,
+        { width: '0%', opacity: 0 },
+        { 
+          width: '100%', 
+          opacity: 1, 
+          duration: 0.8, 
+          ease: 'back.out(1.2)',
+          onStart: () => {
+            // Ensure underline is visible and styled
+            if (underlineRef.current) {
+              underlineRef.current.style.display = 'block';
+            }
+          }
+        },
+        "+=0.2" // Small delay after main animation finishes
       );
     }
 
@@ -43,14 +68,11 @@ export const Hero = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center pt-16 sm:pt-24">
-      <section className="w-full px-auto md:px-24 py-8 md:py-16">
-        <div className="max-w-6xl w-full p-6 sm:p-8 md:p-12">
-          <div className="flex flex-col items-start space-y-6 md:space-y-8 text-left bg">
+    <div className="min-h-[80vh] flex items-center justify-center">
+      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
+        <div className="w-full">
+          <div className="flex flex-col items-start space-y-6 md:space-y-8 text-left">
             
-            {/* Location */}
-           
-
             {/* Title */}
             <div className="space-y-4">
               <h1
@@ -69,11 +91,23 @@ export const Hero = () => {
               </h1>
             </div>
 
-            {/* Subtitle */}
-            <div className="space-y-2">
-              <h2 className="text-blue-300 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">
+            {/* Subtitle with animated underline */}
+            <div className="space-y-2 relative inline-block">
+              <h2 
+                ref={crownTechRef}
+                className="text-blue-300 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold relative inline-block"
+              >
                 CROWNATECH
               </h2>
+              {/* Animated underline that appears after main animation */}
+              <span
+                ref={underlineRef}
+                className="absolute bottom-0 left-0 h-1 bg-yellow-400 rounded-full hidden"
+                style={{ 
+                  width: '0%',
+                  background: 'linear-gradient(90deg, #fbbf24, #f59e0b)'
+                }}
+              />
             </div>
 
             {/* Description */}
@@ -88,19 +122,20 @@ export const Hero = () => {
             <div className="space-y-4 pt-4">
               <div className="flex flex-wrap gap-4 md:gap-6">
                 <Link to="contact"> 
-                <button className="cursor-pointer flex items-center gap-2 bg-white rounded-full text-black font-semibold py-3 px-8  transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                  Get in touch
-                  <span className='bg-black w-9 h-9 rounded-4xl '>
-                    <HiArrowRight className="-rotate-45  text-white mx-auto my-2" />
-                  </span>
-                </button></Link>
+                  <button className="cursor-pointer flex items-center gap-2 bg-white rounded-full text-black font-semibold py-3 px-8 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    Get in touch
+                    <span className='bg-black w-9 h-9 rounded-full inline-flex items-center justify-center'>
+                      <HiArrowRight className="-rotate-45 text-white" />
+                    </span>
+                  </button>
+                </Link>
 
-               <Link to="works">
-                <button className="cursor-pointer flex items-center gap-2 hover:border-2 border-white text-white font-semibold py-3 px-8 hover:rounded-4xl transition-all duration-300  hover:scale-105 hover:shadow-lg">
-                  Works
-                  <AiOutlineArrowRight className="-rotate-45" />
-                </button>
-               </Link>
+                <Link to="works">
+                  <button className="cursor-pointer flex items-center gap-2 hover:border-2 border-white text-white font-semibold py-3 px-8 hover:rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    Works
+                    <AiOutlineArrowRight className="-rotate-45" />
+                  </button>
+                </Link>
               </div>
             </div>
 
