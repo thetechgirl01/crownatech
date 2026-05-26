@@ -1,5 +1,8 @@
 // src/pages/ServicesPage.jsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 import {
   MdCode,
   MdMobileFriendly,
@@ -11,9 +14,16 @@ import {
 } from "react-icons/md";
 import { HiArrowRight } from "react-icons/hi";
 
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
 const ServicesPage = () => {
+  const sectionRef = useRef(null);
+  const headingRef = useRef(null);
+  const quoteRef = useRef(null);
+  const animationTriggered = useRef(false);
+
   const services = [
-   
     {
       icon: <MdCode className="w-6 h-6 sm:w-8 sm:h-8" />,
       title: "Custom Web Design & Development",
@@ -23,7 +33,6 @@ const ServicesPage = () => {
         "Fully responsive layouts that adapt seamlessly across all screen sizes. We ensure your website looks and works perfectly across smartphones, tablets, and desktops through responsive design and testing. Our web development process focuses on fast, secure, and scalable digital products that are easy to maintain and ready to grow.",
       link: "#"
     },
- 
     {
       icon: <MdSearch className="w-6 h-6 sm:w-8 sm:h-8" />,
       title: "Performance & SEO optimization",
@@ -33,8 +42,6 @@ const ServicesPage = () => {
         "We combine clean semantic code, fast load speeds, and SEO best practices to improve rankings and discoverability. Advanced tracking systems that turn user activity into insights. We set up analytics tools to understand user behavior, traffic sources, and conversions for smarter decisions.",
       link: "#"
     },
-
-
     {
       icon: <MdCloud className="w-6 h-6 sm:w-8 sm:h-8" />,
       title: "Cloud Hosting",
@@ -44,32 +51,110 @@ const ServicesPage = () => {
         "High availability hosting with flexible scaling and performance optimization. Strong security layers to protect platforms and data. We implement SSL, secure authentication, updates, and best practices to protect against threats. Continuous maintenance, updates, monitoring, and feature enhancements for long-term reliability.",
       link: "#"
     },
-
   ];
 
+  useEffect(() => {
+    // Only run animation if component is mounted and not triggered yet
+    if (!headingRef.current || animationTriggered.current) return;
+
+    // Create the typing effect with SplitText
+    const headingSplit = new SplitText(headingRef.current, {
+      type: "chars,words",
+      charsClass: "char",
+    });
+
+    // Set initial state: all characters hidden
+    gsap.set(headingSplit.chars, {
+      opacity: 0,
+      y: 20,
+      rotateX: -90,
+      transformOrigin: "top center"
+    });
+
+    // Create scroll-triggered animation
+    const typingTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        end: "top 30%",
+        toggleActions: "play none none reset",
+        onEnter: () => {
+          animationTriggered.current = true;
+        }
+      }
+    });
+
+    // Staggered animation for each character
+    typingTimeline.to(headingSplit.chars, {
+      duration: 0.08,
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      stagger: {
+        amount: 1.5,
+        from: "start",
+        ease: "power2.out"
+      },
+      ease: "back.out(1)"
+    });
+
+    // Add a subtle fade-in for the quote text
+    typingTimeline.fromTo(quoteRef.current,
+      {
+        opacity: 0,
+        y: 15
+      },
+      {
+        duration: 0.8,
+        opacity: 1,
+        y: 0,
+        ease: "power2.out"
+      },
+      "-=0.5" // Overlap with the last part of typing
+    );
+
+    // Cleanup function
+    return () => {
+      if (headingSplit) headingSplit.revert();
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars.trigger === sectionRef.current) {
+          trigger.kill();
+        }
+      });
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen py-10 sm:py-16 ">
-      
+    <div className="min-h-screen py-10 sm:py-16">
       {/* HERO */}
-      <header className="px-auto  max-w-9xl  md:max-w-7xl mx-auto mb-12 sm:mb-20">
+      <header 
+        ref={sectionRef}
+        className="px-auto max-w-9xl md:max-w-7xl mx-auto mb-12 sm:mb-20"
+      >
         <div className="flex flex-col lg:flex-row justify-between gap-8">
-          
-          <h1 className="
-            text-white font-bold leading-tight
-            text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-            text-center lg:text-left
-            max-w-xl
-          ">
+          <h1 
+            ref={headingRef}
+            className="
+              text-white font-bold leading-tight
+              text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+              text-center lg:text-left
+              max-w-xl
+            "
+          >
             What Are The Services We Offer?
           </h1>
 
-          <p className="
-            text-white/50
-            text-sm sm:text-base md:text-lg
-            max-w-lg
-            text-center lg:text-right
-            leading-relaxed
-          ">
+          <p 
+            ref={quoteRef}
+            className="
+              text-white/50
+              text-sm sm:text-base md:text-lg
+              max-w-lg
+              text-center lg:text-right
+              leading-relaxed
+              opacity-0
+            "
+          >
             “Excellence is not an act, but a habit. It is achieved through discipline,
             precision, and a commitment to doing things right even when no one is watching.”
             <span className="block mt-2 text-white/40 text-xs sm:text-sm">
@@ -82,7 +167,6 @@ const ServicesPage = () => {
       {/* SERVICES GRID */}
       <section className="px-auto max-w-9xl md:max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          
           {services.map((service, index) => (
             <div
               key={index}
@@ -133,7 +217,7 @@ const ServicesPage = () => {
                   transition
                 "
               >
-                <span className="text-white font-medium  mx-auto">
+                <span className="text-white font-medium mx-auto">
                   Read more
                 </span>
 
