@@ -266,16 +266,7 @@ const Contact = () => {
                 </a>
               </div>
               
-              {/* Email Contact - Better alignment on mobile */}
-              <div ref={emailRef} className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
-                <FaRegEnvelope className="w-4 h-4 text-yellow-400" />
-                <a 
-                  href="mailto:hello@crownatech.com" 
-                  className="text-gray-300 text-sm sm:text-base hover:text-yellow-400 transition-colors"
-                >
-                  contact@crownatech.com
-                </a>
-              </div>
+              
             </div>
           </div>
         </header>
