@@ -129,7 +129,7 @@ const Works = () => {
 
                 {/* Script badge if applicable */}
                 {work.scriptAvailable && (
-                  <span className="inline-block mt-4 px-3 py-1 text-xs uppercase tracking-wide rounded-full bg-yellow-400/20 text-yellow-400">
+                  <span className="inline-block mt-4 px-3 py-1 text-xs mb-20 uppercase tracking-wide rounded-full bg-yellow-400/20 text-yellow-400">
                     Script Available
                   </span>
                 )}
@@ -153,7 +153,7 @@ const ProjectCard = ({ project }) => {
   const isStock = project.kind === 'stock';
   const ext = project.externalLink;
   return (
-    <div className="relative min-w-[320px]">
+    <div className="relative min-w-[320px] mt-20">
       <Link to={`/projects/${project.slug}`} aria-label={`View ${project.title}`}>
         <div
           className="relative h-[480px] rounded-3xl overflow-hidden group cursor-pointer"

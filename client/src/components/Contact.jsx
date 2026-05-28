@@ -227,47 +227,12 @@ const Contact = () => {
                   text-center lg:text-left
                 "
               >
-                Have an idea? 
-                <span className="block text-yellow-400 mt-2">We can help.</span>
+                we are on
+                <span className="block text-yellow-400 mt-2">social media.</span>
               </h1>
             </div>
             
-            {/* Contact Info - Better positioned on mobile */}
-            <div className="lg:w-1/2 flex flex-col items-center lg:items-end">
-              <div ref={buttonRef} className="mb-6 w-full lg:w-auto">
-                <a
-                  href="#contact-form"
-                  className="
-                    group
-                    inline-flex items-center justify-between
-                    w-full lg:w-auto
-                    border border-gray-500
-                    rounded-full
-                    px-6 py-3
-                    text-sm sm:text-base
-                    hover:bg-gray-800
-                    transition-all duration-300
-                  "
-                >
-                  <span className="text-white font-medium mr-4 group-hover:text-white transition-colors">
-                    Get in Touch
-                  </span>
-
-                  <span className="
-                    w-10 h-10
-                    bg-yellow-400
-                    rounded-full
-                    flex items-center justify-center
-                    group-hover:translate-x-1
-                    transition-transform
-                  ">
-                    <HiArrowRight className="text-black w-5 h-5 -rotate-45" />
-                  </span>
-                </a>
-              </div>
-              
-              
-            </div>
+          
           </div>
         </header>
 

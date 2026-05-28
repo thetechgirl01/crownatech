@@ -72,13 +72,7 @@ const Footer = () => {
           </p>
 
           <div className="mt-8 flex flex-col gap-1 text-sm">
-            <a
-              href="mailto:[email protected]"
-              className="group inline-flex items-center gap-1.5 text-white hover:text-yellow-400 transition w-fit"
-            >
-              [email protected]
-              <HiArrowUpRight className="w-4 h-4 -translate-y-px group-hover:translate-x-0.5 group-hover:-translate-y-1 transition-transform" />
-            </a>
+       
             <span className="text-white/40">Lagos, Nigeria · Remote</span>
           </div>
         </div>
@@ -112,31 +106,16 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* ============================================================ */}
-      {/* 3. Bottom bar                                                 */}
-      {/* ============================================================ */}
+    
       <div className="relative border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 py-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
           <p className="text-white/40 order-2 sm:order-1">
             © {year} CrownaTech. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-2 order-1 sm:order-2">
-            {SOCIALS.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="w-9 h-9 rounded-full border border-white/10 hover:border-yellow-400/60 hover:bg-yellow-400/5 text-white/70 hover:text-yellow-400 flex items-center justify-center transition"
-              >
-                <Icon className="w-4 h-4" />
-              </a>
-            ))}
-          </div>
 
-          <LocalClock />
+
+  
         </div>
       </div>
     </footer>
