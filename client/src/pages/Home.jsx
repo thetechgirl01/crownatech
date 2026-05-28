@@ -45,19 +45,19 @@ const Home = () => {
         <Hero />
       </div>
 
-      <div className="px-9 bg-gray-900/95 border border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="px-9 bg-gray-900/95 border border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Services />
       </div>
 
-      <div className="px-9 bg-white rounded-tr-3xl rounded-tl-3xl">
+      <div className="px-9 bg-white border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <About />
       </div>
 
-      <div className="px-9 bg-gray-900/95 border border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="px-9 bg-gray-900/95 border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Projects />
       </div>
 
-      <div className="px-9 bg-white border border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="px-9 bg-black border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Workprocess />
       </div>
 
