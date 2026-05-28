@@ -49,7 +49,7 @@ export default function Navbar() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to='/'>
-            <div className="flex-shrink-0 w-12">
+            <div className="flex-shrink-0 w-10 h-10">
               <img src={Tklogo} alt="crownatech Logo" />
             </div>
             </Link>
