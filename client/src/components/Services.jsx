@@ -147,7 +147,7 @@ const ServicesPage = () => {
           <p 
             ref={quoteRef}
             className="
-              text-white/50
+              text-muted
               text-sm sm:text-base md:text-lg
               max-w-lg
               text-center lg:text-right
@@ -157,7 +157,7 @@ const ServicesPage = () => {
           >
             “Excellence is not an act, but a habit. It is achieved through discipline,
             precision, and a commitment to doing things right even when no one is watching.”
-            <span className="block mt-2 text-white/40 text-xs sm:text-sm">
+            <span className="block mt-2 text-muted text-xs sm:text-sm">
               — Inspired by Aristotle
             </span>
           </p>

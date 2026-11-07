@@ -69,7 +69,7 @@ const ProjectDetail = () => {
         {/* Back */}
         <Link
           to="/works"
-          className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8"
+          className="inline-flex items-center gap-2 text-muted hover:text-white text-sm mb-8"
         >
           <HiOutlineArrowLeft className="w-4 h-4" /> Back to Works
         </Link>
@@ -114,7 +114,7 @@ const ProjectDetail = () => {
               href={project.externalLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="cursor-pointer inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-8 rounded-full hover:bg-yellow-500 hover:scale-105 transition-all duration-300"
+              className="ct-button ct-button-primary cursor-pointer inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-8 rounded-full hover:bg-yellow-500 hover:scale-105 transition-all duration-300"
             >
               {ctaLabel}
               <span className="bg-black w-9 h-9 rounded-full flex items-center justify-center">
@@ -175,7 +175,7 @@ const ProjectDetail = () => {
               <div>
                 <p className="text-white font-semibold">{project.testimonial.author}</p>
                 {project.testimonial.role && (
-                  <p className="text-white/60 text-sm">{project.testimonial.role}</p>
+                  <p className="text-muted text-sm">{project.testimonial.role}</p>
                 )}
               </div>
             </div>
@@ -188,7 +188,7 @@ const ProjectDetail = () => {
             <h3 className="text-white font-bold text-2xl sm:text-3xl mb-4">
               {isStock ? 'Get this for your project' : 'See it in action'}
             </h3>
-            <p className="text-white/60 mb-8 max-w-xl mx-auto">
+            <p className="text-muted mb-8 max-w-xl mx-auto">
               {isStock
                 ? 'Click below to head to checkout. Payment is handled by our gateway provider.'
                 : 'Click below to visit the live site we built.'}
@@ -197,7 +197,7 @@ const ProjectDetail = () => {
               href={project.externalLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-10 rounded-full hover:bg-yellow-500 hover:scale-105 transition-all duration-300"
+              className="ct-button ct-button-primary inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-10 rounded-full hover:bg-yellow-500 hover:scale-105 transition-all duration-300"
             >
               {ctaLabel}
               <span className="bg-black w-9 h-9 rounded-full flex items-center justify-center">

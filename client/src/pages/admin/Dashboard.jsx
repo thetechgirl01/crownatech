@@ -17,11 +17,11 @@ const StatCard = ({ icon: Icon, label, value, sub, to }) => {
   const body = (
     <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-yellow-400/40 transition h-full">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-white/60 text-sm">{label}</span>
+        <span className="text-muted text-sm">{label}</span>
         <Icon className="w-5 h-5 text-yellow-400" />
       </div>
       <div className="text-white text-3xl font-bold">{value}</div>
-      {sub && <p className="text-white/40 text-xs mt-2">{sub}</p>}
+      {sub && <p className="text-muted text-xs mt-2">{sub}</p>}
     </div>
   );
   return to ? <Link to={to}>{body}</Link> : body;
@@ -84,7 +84,7 @@ const Dashboard = () => {
 
       <header className="mb-8">
         <h1 className="text-white text-3xl font-bold">Dashboard</h1>
-        <p className="text-white/60 mt-2">Quick overview of your site.</p>
+        <p className="text-muted mt-2">Quick overview of your site.</p>
       </header>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
@@ -125,7 +125,7 @@ const Dashboard = () => {
           </Link>
         </div>
         {recentContacts.length === 0 ? (
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center text-white/60">
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center text-muted">
             No messages yet.
           </div>
         ) : (
@@ -142,10 +142,10 @@ const Dashboard = () => {
                         </span>
                       )}
                     </div>
-                    <p className="text-white/50 text-sm truncate">{c.email}</p>
+                    <p className="text-muted text-sm truncate">{c.email}</p>
                     <p className="text-white/70 text-sm mt-2 line-clamp-2">{c.message}</p>
                   </div>
-                  <span className="text-white/40 text-xs flex-shrink-0">
+                  <span className="text-muted text-xs flex-shrink-0">
                     {new Date(c.createdAt).toLocaleDateString()}
                   </span>
                 </li>

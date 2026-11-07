@@ -143,7 +143,7 @@ const YoutubeSection = () => {
                 </p>
 
                 <div className="flex items-center justify-between">
-                  <div className="text-white/50 text-xs">
+                  <div className="text-muted text-xs">
                     3 days ago
                   </div>
                   <button className="
@@ -243,7 +243,7 @@ const YoutubeSection = () => {
                 </p>
 
                 <div className="flex items-center justify-between">
-                  <div className="text-white/50 text-xs">
+                  <div className="text-muted text-xs">
                     {video.uploadDate}
                   </div>
                   <button className="

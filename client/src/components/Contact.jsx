@@ -264,7 +264,7 @@ const Contact = () => {
                 </h3>
                 
                 <p className="
-                  text-white/60
+                  text-muted
                   text-sm sm:text-base
                   mb-6 sm:mb-8
                   leading-relaxed
@@ -347,7 +347,7 @@ const Contact = () => {
                     CrownaTech
                   </h2>
                   
-                  <p className="text-white/60 text-xs sm:text-sm">
+                  <p className="text-muted text-xs sm:text-sm">
                     Building digital excellence since 2019
                   </p>
                 </div>

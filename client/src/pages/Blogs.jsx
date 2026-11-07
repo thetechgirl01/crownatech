@@ -154,7 +154,7 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
                   setVisibleCount(PAGE_SIZE);
                 }}
                 className={`relative pb-1 text-sm sm:text-base font-medium transition ${
-                  active ? 'text-white' : 'text-white/50 hover:text-white/80'
+                  active ? 'text-white' : 'text-muted hover:text-white/80'
                 }`}
               >
                 {cat}
@@ -171,7 +171,7 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
 
         <label className="relative flex items-center w-full lg:w-72">
           <HiOutlineSearch
-            className="absolute left-3 w-4 h-4 text-white/40 pointer-events-none"
+            className="absolute left-3 w-4 h-4 text-muted pointer-events-none"
             aria-hidden="true"
           />
           <input
@@ -182,7 +182,7 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
               setVisibleCount(PAGE_SIZE);
             }}
             placeholder="Search…"
-            className="w-full pl-9 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-yellow-400/60 transition"
+            className="ct-field w-full pl-9 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-white placeholder:text-muted text-sm focus:outline-none focus:border-yellow-400/60 transition"
             aria-label="Search blog posts"
           />
         </label>
@@ -275,7 +275,7 @@ const BlogCard = ({ post }) => {
           {post.title}
         </h2>
 
-        <div className="flex items-center gap-3 text-white/50 text-sm mt-3">
+        <div className="flex items-center gap-3 text-muted text-sm mt-3">
           <time dateTime={post.publishedAt}>
             {formatDate(post.publishedAt || post.createdAt)}
           </time>
@@ -313,7 +313,7 @@ const NewsletterStrip = () => {
           <h3 className="text-white text-2xl sm:text-3xl font-bold mb-2">
             Subscribe to our blog
           </h3>
-          <p className="text-white/60 text-sm">
+          <p className="text-muted text-sm">
             Once a month we'll send you blog updates. No spam, ever.
           </p>
         </div>
@@ -333,7 +333,7 @@ const NewsletterStrip = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email"
-              className="flex-1 bg-transparent text-white placeholder:text-white/40 text-base focus:outline-none"
+              className="ct-field flex-1 bg-transparent text-white placeholder:text-muted text-base focus:outline-none"
               aria-label="Email address"
             />
             <button

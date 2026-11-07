@@ -122,7 +122,7 @@ export const Hero = () => {
             <div className="space-y-4 pt-4">
               <div className="flex flex-wrap gap-4 md:gap-6">
                 <Link to="contact"> 
-                  <button className="cursor-pointer flex items-center gap-2 bg-white rounded-full text-black font-semibold py-3 px-8 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                  <button className="ct-button ct-button-secondary cursor-pointer flex items-center gap-2 bg-white rounded-full text-black font-semibold py-3 px-8 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     Let's talk
                     <span className='bg-black w-9 h-9 rounded-full inline-flex items-center justify-center'>
                       <HiArrowRight className="-rotate-45 text-white" />

@@ -6,7 +6,7 @@ const EmptyState = ({ title = 'Nothing here yet', message, action }) => (
       <span className="text-yellow-400 text-2xl" aria-hidden="true">·</span>
     </div>
     <h3 className="text-white text-xl font-bold mb-2">{title}</h3>
-    {message && <p className="text-white/60 max-w-md mx-auto">{message}</p>}
+    {message && <p className="text-muted max-w-md mx-auto">{message}</p>}
     {action && <div className="mt-6">{action}</div>}
   </div>
 );

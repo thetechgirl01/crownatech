@@ -66,20 +66,20 @@ const Footer = () => {
               Crowna<span className="text-yellow-400">Tech</span>
             </h2>
           </Link>
-          <p className="text-white/55 mt-5 max-w-md leading-relaxed">
+          <p className="text-muted mt-5 max-w-md leading-relaxed">
             We design and build digital products that earn attention and
             convert it. Based in Lagos, working worldwide.
           </p>
 
           <div className="mt-8 flex flex-col gap-1 text-sm">
        
-            <span className="text-white/40">Lagos, Nigeria · Remote</span>
+            <span className="text-muted">Lagos, Nigeria · Remote</span>
           </div>
         </div>
 
         {/* Nav */}
         <nav className="md:col-span-3" aria-label="Footer navigation">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-5">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-muted mb-5">
             Sitemap
           </p>
           <ul className="space-y-3">
@@ -99,7 +99,7 @@ const Footer = () => {
 
         {/* Newsletter */}
         <div className="md:col-span-4">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-5">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-muted mb-5">
             Stay in the loop
           </p>
           <NewsletterForm />
@@ -109,7 +109,7 @@ const Footer = () => {
     
       <div className="relative border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 py-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
-          <p className="text-white/40 order-2 sm:order-1">
+          <p className="text-muted order-2 sm:order-1">
             © {year} CrownaTech. All rights reserved.
           </p>
 
@@ -231,7 +231,7 @@ const NewsletterForm = () => {
 
   return (
     <>
-      <p className="text-white/55 text-sm leading-relaxed mb-5 max-w-sm">
+      <p className="text-muted text-sm leading-relaxed mb-5 max-w-sm">
         One email a month. New work, new posts, the occasional thought.
         No noise.
       </p>
@@ -244,17 +244,17 @@ const NewsletterForm = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@somewhere.com"
           aria-label="Email address"
-          className="
+          className="ct-field
             w-full pl-4 pr-28 py-3.5
             bg-white/5 border border-white/10 rounded-full
-            text-white placeholder:text-white/40 text-sm
+            text-white placeholder:text-muted text-sm
             focus:outline-none focus:border-yellow-400/60 focus:bg-white/[0.07]
             transition
           "
         />
         <button
           type="submit"
-          className="
+          className="ct-button ct-button-primary
             absolute right-1.5 top-1/2 -translate-y-1/2
             px-4 py-2.5 rounded-full
             bg-yellow-400 hover:bg-yellow-300 text-black
@@ -300,7 +300,7 @@ const LocalClock = () => {
   });
 
   return (
-    <p className="text-white/40 text-xs flex items-center gap-2 order-3">
+    <p className="text-muted text-xs flex items-center gap-2 order-3">
       <span
         className="w-1.5 h-1.5 rounded-full bg-yellow-400"
         aria-hidden="true"

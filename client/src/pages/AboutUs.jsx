@@ -157,7 +157,7 @@ const AboutUs = () => {
                       <div className="text-white text-2xl font-bold">
                         {stat.value}
                       </div>
-                      <div className="text-white/60 text-sm mt-1">
+                      <div className="text-muted text-sm mt-1">
                         {stat.label}
                       </div>
                     </div>
@@ -219,7 +219,7 @@ const AboutUs = () => {
                   {item.title}
                 </h3>
                 <p className="
-                  text-white/60
+                  text-muted
                   text-sm leading-relaxed
                 ">
                   {item.description}
@@ -269,7 +269,7 @@ const AboutUs = () => {
                   {service.title}
                 </h3>
                 <p className="
-                  text-white/60
+                  text-muted
                   text-sm leading-relaxed
                 ">
                   {service.description}
@@ -331,7 +331,7 @@ const AboutUs = () => {
                   rounded-xl
                 ">
                   <h4 className="text-white font-bold mb-2">Technical Excellence</h4>
-                  <p className="text-white/60 text-sm">
+                  <p className="text-muted text-sm">
                     Clean code, modern frameworks, and scalable architecture
                   </p>
                 </div>
@@ -343,7 +343,7 @@ const AboutUs = () => {
                   rounded-xl
                 ">
                   <h4 className="text-white font-bold mb-2">Client-Focused</h4>
-                  <p className="text-white/60 text-sm">
+                  <p className="text-muted text-sm">
                     Your goals are our priority, with regular updates and collaboration
                   </p>
                 </div>
@@ -355,7 +355,7 @@ const AboutUs = () => {
                   rounded-xl
                 ">
                   <h4 className="text-white font-bold mb-2">Quality Assurance</h4>
-                  <p className="text-white/60 text-sm">
+                  <p className="text-muted text-sm">
                     Rigorous testing and quality checks at every stage
                   </p>
                 </div>

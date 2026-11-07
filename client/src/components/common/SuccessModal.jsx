@@ -41,7 +41,7 @@ const SuccessModal = ({ open, onClose, title = 'Success', message }) => {
         <p className="text-white/70 mb-6">{message}</p>
         <button
           onClick={onClose}
-          className="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-white/90 transition"
+          className="ct-button ct-button-secondary px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-white/90 transition"
           autoFocus
         >
           Close

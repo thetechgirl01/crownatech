@@ -130,7 +130,7 @@ const BlogForm = () => {
 
       <Link
         to="/admin/blogs"
-        className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-4"
+        className="inline-flex items-center gap-2 text-muted hover:text-white text-sm mb-4"
       >
         <HiOutlineArrowLeft className="w-4 h-4" /> Back to posts
       </Link>
@@ -138,7 +138,7 @@ const BlogForm = () => {
       <h1 className="text-white text-3xl font-bold mb-2">
         {isEdit ? 'Edit post' : 'New post'}
       </h1>
-      <p className="text-white/60 mb-8">
+      <p className="text-muted mb-8">
         Use the editor to write rich content. Inline images upload to Cloudinary automatically.
       </p>
 
@@ -186,7 +186,7 @@ const BlogForm = () => {
             {coverPreview ? (
               <img src={coverPreview} alt="Cover preview" className="w-64 h-40 object-cover rounded-xl" />
             ) : (
-              <div className="w-64 h-40 rounded-xl bg-white/5 border border-dashed border-white/20 flex items-center justify-center text-white/40">
+              <div className="w-64 h-40 rounded-xl bg-white/5 border border-dashed border-white/20 flex items-center justify-center text-muted">
                 <HiOutlinePhotograph className="w-8 h-8" />
               </div>
             )}
@@ -240,7 +240,7 @@ const BlogForm = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition disabled:opacity-60"
+            className="ct-button ct-button-primary px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition disabled:opacity-60"
           >
             {submitting ? 'Saving…' : isEdit ? 'Save changes' : 'Create post'}
           </button>
@@ -257,7 +257,7 @@ const BlogForm = () => {
 };
 
 const baseInput =
-  'w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-yellow-400/60 transition';
+  'ct-field w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-muted focus:outline-none focus:border-yellow-400/60 transition';
 
 const Field = ({ label, ...rest }) => (
   <div>

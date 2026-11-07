@@ -192,7 +192,7 @@ const Errandsbybrownie = () => {
               {/* Buy Button
               <a
                 href={projectData.buyLink}
-                className="hero-button bg-white text-black px-8 py-4 rounded-none hover:bg-gray-200 transition-all duration-300 font-medium text-lg"
+                className="ct-button ct-button-secondary hero-button bg-white text-black px-8 py-4 rounded-none hover:bg-gray-200 transition-all duration-300 font-medium text-lg"
               >
                 Buy Script · $149
               </a>
@@ -297,13 +297,13 @@ const Errandsbybrownie = () => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
               href={projectData.demoLink}
-              className="border-2 border-white text-white px-10 py-5 text-lg hover:bg-white hover:text-black transition-all duration-300"
+              className="ct-button ct-button-secondary border-2 border-white text-white px-10 py-5 text-lg hover:bg-white hover:text-black transition-all duration-300"
             >
               View Full Demo
             </a>
             <a
               href={projectData.buyLink}
-              className="bg-white text-black px-10 py-5 text-lg hover:bg-gray-200 transition-all duration-300 font-medium"
+              className="ct-button ct-button-secondary bg-white text-black px-10 py-5 text-lg hover:bg-gray-200 transition-all duration-300 font-medium"
             >
               Purchase Complete Script · $149
             </a>

@@ -229,7 +229,7 @@ const ProjectForm = () => {
 
       <Link
         to="/admin/projects"
-        className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-4"
+        className="inline-flex items-center gap-2 text-muted hover:text-white text-sm mb-4"
       >
         <HiOutlineArrowLeft className="w-4 h-4" /> Back to projects
       </Link>
@@ -237,7 +237,7 @@ const ProjectForm = () => {
       <h1 className="text-white text-3xl font-bold mb-2">
         {isEdit ? 'Edit project' : 'New project'}
       </h1>
-      <p className="text-white/60 mb-8">
+      <p className="text-muted mb-8">
         Everything here will appear on the public Works page (and the Store, if marked as Stock).
       </p>
 
@@ -415,7 +415,7 @@ const ProjectForm = () => {
                   className="w-48 h-32 object-cover rounded-xl"
                 />
               ) : (
-                <div className="w-48 h-32 rounded-xl bg-white/5 border border-dashed border-white/20 flex items-center justify-center text-white/40">
+                <div className="w-48 h-32 rounded-xl bg-white/5 border border-dashed border-white/20 flex items-center justify-center text-muted">
                   <HiOutlinePhotograph className="w-8 h-8" />
                 </div>
               )}
@@ -449,7 +449,7 @@ const ProjectForm = () => {
               <label className="block text-white/70 text-sm">
                 Gallery (multiple — pick as many as you like)
               </label>
-              <span className="text-white/40 text-xs">
+              <span className="text-muted text-xs">
                 {existingGallery.length + galleryFiles.length} image
                 {existingGallery.length + galleryFiles.length === 1 ? '' : 's'} total
               </span>
@@ -512,7 +512,7 @@ const ProjectForm = () => {
                 onChange={onPickGalleryFiles}
               />
             </label>
-            <p className="text-white/40 text-xs mt-2">
+            <p className="text-muted text-xs mt-2">
               Pick multiple at once, or click again to add more — each click appends to the list.
             </p>
           </div>
@@ -575,7 +575,7 @@ const ProjectForm = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition disabled:opacity-60"
+            className="ct-button ct-button-primary px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition disabled:opacity-60"
           >
             {submitting ? 'Saving…' : isEdit ? 'Save changes' : 'Create project'}
           </button>
@@ -593,13 +593,13 @@ const ProjectForm = () => {
 
 /* ---------- small form primitives, scoped to admin ---------- */
 const baseInput =
-  'w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-yellow-400/60 transition';
+  'ct-field w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-muted focus:outline-none focus:border-yellow-400/60 transition';
 
 const Field = ({ label, hint, ...rest }) => (
   <div>
     <label className="block text-white/70 text-sm mb-2">{label}</label>
     <input className={baseInput} {...rest} />
-    {hint && <p className="text-white/40 text-xs mt-1">{hint}</p>}
+    {hint && <p className="text-muted text-xs mt-1">{hint}</p>}
   </div>
 );
 

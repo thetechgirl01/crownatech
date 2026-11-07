@@ -81,7 +81,7 @@ const AdminLayout = () => {
 
         <div className="p-4 border-t border-white/10">
           <div className="px-4 py-3 mb-2">
-            <p className="text-xs text-white/40">Signed in as</p>
+            <p className="text-xs text-muted">Signed in as</p>
             <p className="text-sm text-white truncate">{user?.email}</p>
           </div>
           <button

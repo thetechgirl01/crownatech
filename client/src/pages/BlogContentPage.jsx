@@ -144,7 +144,7 @@ const BlogContentPage = () => {
           action={
             <Link
               to="/blogs"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-black rounded-full font-medium transition"
+              className="ct-button ct-button-primary inline-flex items-center gap-2 px-5 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-black rounded-full font-medium transition"
             >
               <HiOutlineArrowLeft className="w-4 h-4" />
               Back to blog
@@ -167,7 +167,7 @@ const BlogContentPage = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-10 mb-8">
         <Link
           to="/blogs"
-          className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm transition"
+          className="inline-flex items-center gap-2 text-muted hover:text-white text-sm transition"
         >
           <HiOutlineArrowLeft className="w-4 h-4" />
           All posts
@@ -194,12 +194,12 @@ const BlogContentPage = () => {
         </h1>
 
         {post.excerpt && (
-          <p className="text-white/65 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
+          <p className="text-muted text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
             {post.excerpt}
           </p>
         )}
 
-        <div className="flex items-center justify-center gap-3 text-white/50 text-sm mt-8">
+        <div className="flex items-center justify-center gap-3 text-muted text-sm mt-8">
           <span className="text-white/80">{post.author || 'CrownaTech'}</span>
           <span aria-hidden="true">·</span>
           <time dateTime={post.publishedAt}>
@@ -235,7 +235,7 @@ const BlogContentPage = () => {
             <div className="sticky top-28">
               {headings.length > 0 && (
                 <nav className="mb-10" aria-label="Table of contents">
-                  <p className="text-white/40 text-xs uppercase tracking-[0.18em] mb-4">
+                  <p className="text-muted text-xs uppercase tracking-[0.18em] mb-4">
                     On this page
                   </p>
                   <ul className="space-y-2.5">
@@ -249,7 +249,7 @@ const BlogContentPage = () => {
                           className={`block text-sm leading-snug transition border-l-2 pl-3 ${
                             activeHeading === h.id
                               ? 'text-yellow-400 border-yellow-400'
-                              : 'text-white/55 hover:text-white border-white/10'
+                              : 'text-muted hover:text-white border-white/10'
                           }`}
                         >
                           {h.text}
@@ -261,7 +261,7 @@ const BlogContentPage = () => {
               )}
 
               <div>
-                <p className="text-white/40 text-xs uppercase tracking-[0.18em] mb-4">
+                <p className="text-muted text-xs uppercase tracking-[0.18em] mb-4">
                   Share
                 </p>
                 <div className="flex items-center gap-2">
@@ -356,7 +356,7 @@ const BlogContentPage = () => {
             </h2>
             <Link
               to="/blogs"
-              className="text-white/60 hover:text-white text-sm transition"
+              className="text-muted hover:text-white text-sm transition"
             >
               All posts →
             </Link>
@@ -385,7 +385,7 @@ const BlogContentPage = () => {
                 <h3 className="text-white text-lg font-semibold leading-snug group-hover:text-yellow-400 transition line-clamp-2">
                   {p.title}
                 </h3>
-                <p className="text-white/40 text-xs mt-2">
+                <p className="text-muted text-xs mt-2">
                   {formatDate(p.publishedAt || p.createdAt)}
                 </p>
               </Link>

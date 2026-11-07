@@ -225,7 +225,7 @@ const Projects = () => {
                 />
               ))
             ) : projects.length === 0 ? (
-              <div className="w-[320px] max-w-full shrink-0 snap-start h-[380px] rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 text-sm px-6 text-center">
+              <div className="w-[320px] max-w-full shrink-0 snap-start h-[380px] rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-muted text-sm px-6 text-center">
                 Featured projects will appear here.
               </div>
             ) : (

@@ -142,7 +142,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-white font-medium mb-1">Expert Consultation</h4>
-                    <p className="text-white/60 text-sm">
+                    <p className="text-muted text-sm">
                       Free initial consultation to understand your needs and goals
                     </p>
                   </div>
@@ -160,7 +160,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-white font-medium mb-1">Transparent Process</h4>
-                    <p className="text-white/60 text-sm">
+                    <p className="text-muted text-sm">
                       Clear communication and regular updates throughout the project
                     </p>
                   </div>
@@ -178,7 +178,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-white font-medium mb-1">Quality Focus</h4>
-                    <p className="text-white/60 text-sm">
+                    <p className="text-muted text-sm">
                       Clean code, modern design, and scalable solutions
                     </p>
                   </div>
@@ -197,7 +197,7 @@ const Contact = () => {
                 <FaMapMarkerAlt className="w-5 h-5 text-white" />
                 <h4 className="text-white font-medium">Our Location</h4>
               </div>
-              <p className="text-white/60 text-sm mb-4">
+              <p className="text-muted text-sm mb-4">
                 Lagos, Nigeria<br />
                 Available for worldwide projects
               </p>
@@ -206,7 +206,7 @@ const Contact = () => {
                 <FaRegEnvelope className="w-5 h-5 text-white" />
                 <h4 className="text-white font-medium">Get in Touch</h4>
               </div>
-              <p className="text-white/60 text-sm">
+              <p className="text-muted text-sm">
                 Typically respond within 24 hours<br />
                 100+ projects successfully delivered
               </p>
@@ -224,7 +224,7 @@ const Contact = () => {
                 <div className="text-white text-lg font-bold mb-1">
                   24-48 Hours
                 </div>
-                <div className="text-white/60 text-sm">
+                <div className="text-muted text-sm">
                   Average Response
                 </div>
               </div>
@@ -239,7 +239,7 @@ const Contact = () => {
                 <div className="text-white text-lg font-bold mb-1">
                   100+ Projects
                 </div>
-                <div className="text-white/60 text-sm">
+                <div className="text-muted text-sm">
                   Successfully Delivered
                 </div>
               </div>
@@ -274,14 +274,14 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="
+                    className="ct-field
                       w-full
                       px-4 py-3
                       backdrop-blur-xl 
                      
                       rounded-xl
                       text-white
-                      placeholder:text-white/40
+                      placeholder:text-muted
                       focus:outline-none focus:border-white/40
                       transition
                     "
@@ -299,14 +299,14 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="
+                    className="ct-field
                       w-full
                       px-4 py-3
                       backdrop-blur-xl 
                      
                       rounded-xl
                       text-white
-                      placeholder:text-white/40
+                      placeholder:text-muted
                       focus:outline-none focus:border-white/40
                       transition
                     "
@@ -325,14 +325,14 @@ const Contact = () => {
                   name="budget"
                   value={formData.budget}
                   onChange={handleInputChange}
-                  className="
+                  className="ct-field
                      w-full
                       px-4 py-3
                       backdrop-blur-xl 
                      
                       rounded-xl
                       text-white
-                      placeholder:text-white/40
+                      placeholder:text-muted
                       focus:outline-none focus:border-white/40
                       transition
                   "
@@ -351,14 +351,14 @@ const Contact = () => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="
+                  className="ct-field
                     w-full
                       px-4 py-3
                       backdrop-blur-xl 
                      
                       rounded-xl
                       text-white
-                      placeholder:text-white/40
+                      placeholder:text-muted
                       focus:outline-none focus:border-white/40
                       transition
                     resize-none
@@ -380,7 +380,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="
+                className="ct-button ct-button-secondary
                   w-fit
                   px-6 py-4
                   bg-white
@@ -411,7 +411,7 @@ const Contact = () => {
 
               {/* Privacy Note */}
               <p className="
-                text-white/40 text-xs sm:text-sm
+                text-muted text-xs sm:text-sm
                 text-center mt-6
               ">
                 We respect your privacy. Your information is secure with us.
@@ -446,7 +446,7 @@ const Contact = () => {
                 </h3>
                 
                 <p className="
-                  text-white/60
+                  text-muted
                   text-base sm:text-lg
                   mb-8 sm:mb-10
                   leading-relaxed
@@ -524,7 +524,7 @@ const Contact = () => {
                     CrownaTech
                   </h2>
                   
-                  <p className="text-white/60 text-sm">
+                  <p className="text-muted text-sm">
                     Building digital excellence since 2019
                   </p>
                 </div>

@@ -292,7 +292,7 @@ const FAQ = () => {
                   w-8 h-8
                   flex-shrink-0
                   flex items-center justify-center
-                  text-white/60
+                  text-muted
                 ">
                   {activeIndex === index ? (
                     <FaChevronUp className="w-5 h-5" />

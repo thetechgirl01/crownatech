@@ -51,11 +51,11 @@ const AdminBlogs = () => {
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
           <h1 className="text-white text-3xl font-bold">Blog posts</h1>
-          <p className="text-white/60 mt-1">Write, edit, and publish articles.</p>
+          <p className="text-muted mt-1">Write, edit, and publish articles.</p>
         </div>
         <Link
           to="/admin/blogs/new"
-          className="inline-flex items-center gap-2 px-5 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition w-fit"
+          className="ct-button ct-button-primary inline-flex items-center gap-2 px-5 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition w-fit"
         >
           <HiOutlinePlus className="w-5 h-5" /> New post
         </Link>
@@ -70,7 +70,7 @@ const AdminBlogs = () => {
           action={
             <Link
               to="/admin/blogs/new"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition"
+              className="ct-button ct-button-primary inline-flex items-center gap-2 px-5 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition"
             >
               <HiOutlinePlus className="w-5 h-5" /> New post
             </Link>
@@ -92,7 +92,7 @@ const AdminBlogs = () => {
                     loading="lazy"
                   />
                 ) : (
-                  <div className="w-full h-24 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 text-xs">
+                  <div className="w-full h-24 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-muted text-xs">
                     No cover
                   </div>
                 )}
@@ -102,13 +102,13 @@ const AdminBlogs = () => {
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <div className="min-w-0">
                     <h3 className="text-white font-semibold text-lg truncate">{p.title}</h3>
-                    <p className="text-white/40 text-xs mt-1 truncate">/{p.slug}</p>
+                    <p className="text-muted text-xs mt-1 truncate">/{p.slug}</p>
                   </div>
                   <span
                     className={`px-2.5 py-1 text-[11px] rounded-full ${
                       p.published
                         ? 'bg-green-400/20 text-green-300'
-                        : 'bg-white/10 text-white/60'
+                        : 'bg-white/10 text-muted'
                     }`}
                   >
                     {p.published ? 'Published' : 'Draft'}
@@ -116,10 +116,10 @@ const AdminBlogs = () => {
                 </div>
 
                 {p.excerpt && (
-                  <p className="text-white/60 text-sm line-clamp-2 mb-3">{p.excerpt}</p>
+                  <p className="text-muted text-sm line-clamp-2 mb-3">{p.excerpt}</p>
                 )}
 
-                <div className="flex flex-wrap items-center gap-3 text-xs text-white/40 mb-3">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-muted mb-3">
                   <span>{new Date(p.publishedAt || p.createdAt).toLocaleDateString()}</span>
                   <span>·</span>
                   <span>{p.category}</span>

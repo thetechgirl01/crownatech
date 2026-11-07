@@ -59,7 +59,7 @@ const Store = () => {
             action={
               <Link
                 to="/works"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition"
+                className="ct-button ct-button-primary inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-500 transition"
               >
                 Browse our work
               </Link>
@@ -107,7 +107,7 @@ const StoreCard = ({ item }) => {
           </Link>
         </h3>
         {item.tagline && (
-          <p className="text-white/60 text-sm mb-4 line-clamp-2">{item.tagline}</p>
+          <p className="text-muted text-sm mb-4 line-clamp-2">{item.tagline}</p>
         )}
 
         <div className="mt-auto flex items-center justify-between gap-3 pt-4">
@@ -117,16 +117,16 @@ const StoreCard = ({ item }) => {
                 <p className="text-white text-2xl font-bold">
                   {item.currency || 'USD'} {item.price}
                 </p>
-                <p className="text-white/40 text-xs">One-time purchase</p>
+                <p className="text-muted text-xs">One-time purchase</p>
               </div>
             ) : (
-              <p className="text-white/60 text-sm">Contact for pricing</p>
+              <p className="text-muted text-sm">Contact for pricing</p>
             )}
           </div>
           <a
             href={buyLink}
             {...(item.externalLink ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-yellow-400 text-black rounded-full font-semibold text-sm hover:bg-yellow-500 transition"
+            className="ct-button ct-button-primary inline-flex items-center gap-2 px-4 py-2.5 bg-yellow-400 text-black rounded-full font-semibold text-sm hover:bg-yellow-500 transition"
           >
             Buy
             <HiArrowUpRight className="w-4 h-4" />

@@ -45,7 +45,7 @@ const AdminLogin = () => {
             CrownaTech<span className="text-yellow-400">.</span>
           </Link>
           <h1 className="text-white text-3xl font-bold mt-6 mb-2">Welcome back</h1>
-          <p className="text-white/60">Sign in to manage your site</p>
+          <p className="text-muted">Sign in to manage your site</p>
         </div>
 
         <form
@@ -64,7 +64,7 @@ const AdminLogin = () => {
               Email
             </label>
             <div className="relative">
-              <HiOutlineMail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
+              <HiOutlineMail className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 id="email"
                 type="email"
@@ -72,7 +72,7 @@ const AdminLogin = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-yellow-400/60 transition"
+                className="ct-field w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-muted focus:outline-none focus:border-yellow-400/60 transition"
                 placeholder="[email protected]"
               />
             </div>
@@ -83,7 +83,7 @@ const AdminLogin = () => {
               Password
             </label>
             <div className="relative">
-              <HiOutlineLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
+              <HiOutlineLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 id="password"
                 type="password"
@@ -91,7 +91,7 @@ const AdminLogin = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-yellow-400/60 transition"
+                className="ct-field w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-muted focus:outline-none focus:border-yellow-400/60 transition"
                 placeholder="••••••••"
               />
             </div>
@@ -105,7 +105,7 @@ const AdminLogin = () => {
             {submitting ? 'Signing in…' : 'Sign in'}
           </button>
 
-          <p className="text-white/40 text-xs text-center">
+          <p className="text-muted text-xs text-center">
             Protected area. Unauthorized access is prohibited.
           </p>
         </form>

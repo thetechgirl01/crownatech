@@ -64,7 +64,7 @@ const AdminContacts = () => {
 
       <header className="mb-8">
         <h1 className="text-white text-3xl font-bold">Messages</h1>
-        <p className="text-white/60 mt-1">Project enquiries from the contact form.</p>
+        <p className="text-muted mt-1">Project enquiries from the contact form.</p>
       </header>
 
       <div className="flex gap-2 mb-6">
@@ -113,10 +113,10 @@ const AdminContacts = () => {
                     {c.email}
                   </a>
                   {c.budget && (
-                    <p className="text-white/40 text-xs mt-1">Budget: {c.budget}</p>
+                    <p className="text-muted text-xs mt-1">Budget: {c.budget}</p>
                   )}
                 </div>
-                <span className="text-white/40 text-xs flex-shrink-0">
+                <span className="text-muted text-xs flex-shrink-0">
                   {new Date(c.createdAt).toLocaleString()}
                 </span>
               </div>
@@ -126,7 +126,7 @@ const AdminContacts = () => {
               <div className="flex flex-wrap gap-2">
                 <a
                   href={`mailto:${c.email}?subject=Re: Your project enquiry`}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-yellow-400 text-black text-sm font-semibold hover:bg-yellow-500 transition"
+                  className="ct-button ct-button-primary inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-yellow-400 text-black text-sm font-semibold hover:bg-yellow-500 transition"
                 >
                   <HiOutlineReply className="w-4 h-4" /> Reply
                 </a>

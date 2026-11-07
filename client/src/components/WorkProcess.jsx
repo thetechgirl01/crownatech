@@ -312,7 +312,7 @@ const Workprocess = () => {
 
         {/* CTA Section */}
         <div className="mt-16 sm:mt-20 text-center">
-          <button className="
+          <button className="ct-button ct-button-primary
             group
             inline-flex items-center gap-2
             bg-yellow-400

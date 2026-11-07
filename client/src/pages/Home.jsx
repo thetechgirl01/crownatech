@@ -76,7 +76,7 @@ const Home = () => {
           <div className="text-center mt-10">
             <Link
               to="/blogs"
-              className="px-6 py-3 bg-yellow-400 rounded-xl text-black font-semibold hover:bg-yellow-500 transition"
+              className="ct-button ct-button-primary px-6 py-3 bg-yellow-400 rounded-xl text-black font-semibold hover:bg-yellow-500 transition"
             >
               View All Blogs
             </Link>
