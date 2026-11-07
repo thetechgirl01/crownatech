@@ -42,7 +42,7 @@ const ProjectDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center px-6 pt-32 pb-20">
         <div className="text-center">
-          <h1 className="text-white text-3xl font-bold mb-3">{error || 'Project not found'}</h1>
+          <h1 className="ct-page-heading text-white text-3xl font-bold mb-3">{error || 'Project not found'}</h1>
           <Link to="/works" className="text-yellow-400 hover:underline">
             ← Back to Works
           </Link>
@@ -86,7 +86,7 @@ const ProjectDetail = () => {
               </span>
             )}
           </div>
-          <h1 className="text-white font-bold leading-tight text-4xl sm:text-5xl md:text-6xl mb-4">
+          <h1 className="ct-page-heading text-white font-bold leading-tight text-4xl sm:text-5xl md:text-6xl mb-4">
             {project.title}
           </h1>
           {project.tagline && (
@@ -114,7 +114,7 @@ const ProjectDetail = () => {
               href={project.externalLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="ct-button ct-button-primary cursor-pointer inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-8 rounded-full hover:bg-yellow-500 hover:scale-105 transition-all duration-300"
+              className="ct-button ct-button-primary cursor-pointer inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-8 rounded-full hover:bg-yellow-500  transition-all duration-300"
             >
               {ctaLabel}
               <span className="bg-black w-9 h-9 rounded-full flex items-center justify-center">
@@ -197,7 +197,7 @@ const ProjectDetail = () => {
               href={project.externalLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="ct-button ct-button-primary inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-10 rounded-full hover:bg-yellow-500 hover:scale-105 transition-all duration-300"
+              className="ct-button ct-button-primary inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-10 rounded-full hover:bg-yellow-500  transition-all duration-300"
             >
               {ctaLabel}
               <span className="bg-black w-9 h-9 rounded-full flex items-center justify-center">

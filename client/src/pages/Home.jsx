@@ -41,32 +41,32 @@ const Home = () => {
         keywords="crownatech, crowna, tech, web dev in Nigeria, tech in nigeria, web design, web development, digital marketing, creative solutions"
       />
 
-      <div className="px- rounded-tr-3xl rounded-tl-3xl">
+      <div className="rounded-tr-3xl rounded-tl-3xl">
         <Hero />
       </div>
 
-      <div className="px-9 bg-gray-900/95 border border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="bg-gray-900/95 border border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Services />
       </div>
 
-      <div className="px-9 bg-white border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="ct-light-section bg-white border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <About />
       </div>
 
-      <div className="px-9 bg-gray-900/95 border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="bg-gray-900/95 border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Projects />
       </div>
 
-      <div className="px-9 bg-black border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="bg-black border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Workprocess />
       </div>
 
-      <div className="px-9 bg-[#011936] border border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="bg-[#011936] border border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Contact />
       </div>
 
       {recentBlogs.length > 0 && (
-        <div className="px-9 bg-gray-900/95 border border-white/20 rounded-tr-3xl rounded-tl-3xl py-12">
+        <div className="bg-gray-900/95 border border-white/20 rounded-tr-3xl rounded-tl-3xl"><div className="ct-container ct-section">
           <h2 className="text-3xl text-white font-bold mb-6 text-center">
             Latest Blogs
           </h2>
@@ -81,7 +81,7 @@ const Home = () => {
               View All Blogs
             </Link>
           </div>
-        </div>
+        </div></div>
       )}
     </div>
   );

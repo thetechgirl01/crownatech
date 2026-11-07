@@ -1,8 +1,5 @@
 // src/pages/ServicesPage.jsx
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
+import React from "react";
 import {
   MdCode,
   MdMobileFriendly,
@@ -14,14 +11,7 @@ import {
 } from "react-icons/md";
 import { HiArrowRight } from "react-icons/hi";
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger, SplitText);
-
 const ServicesPage = () => {
-  const sectionRef = useRef(null);
-  const headingRef = useRef(null);
-  const quoteRef = useRef(null);
-  const animationTriggered = useRef(false);
 
   const services = [
     {
@@ -53,88 +43,15 @@ const ServicesPage = () => {
     },
   ];
 
-  useEffect(() => {
-    // Only run animation if component is mounted and not triggered yet
-    if (!headingRef.current || animationTriggered.current) return;
-
-    // Create the typing effect with SplitText
-    const headingSplit = new SplitText(headingRef.current, {
-      type: "chars,words",
-      charsClass: "char",
-    });
-
-    // Set initial state: all characters hidden
-    gsap.set(headingSplit.chars, {
-      opacity: 0,
-      y: 20,
-      rotateX: -90,
-      transformOrigin: "top center"
-    });
-
-    // Create scroll-triggered animation
-    const typingTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        end: "top 30%",
-        toggleActions: "play none none reset",
-        onEnter: () => {
-          animationTriggered.current = true;
-        }
-      }
-    });
-
-    // Staggered animation for each character
-    typingTimeline.to(headingSplit.chars, {
-      duration: 0.08,
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      stagger: {
-        amount: 1.5,
-        from: "start",
-        ease: "power2.out"
-      },
-      ease: "back.out(1)"
-    });
-
-    // Add a subtle fade-in for the quote text
-    typingTimeline.fromTo(quoteRef.current,
-      {
-        opacity: 0,
-        y: 15
-      },
-      {
-        duration: 0.8,
-        opacity: 1,
-        y: 0,
-        ease: "power2.out"
-      },
-      "-=0.5" // Overlap with the last part of typing
-    );
-
-    // Cleanup function
-    return () => {
-      if (headingSplit) headingSplit.revert();
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.trigger === sectionRef.current) {
-          trigger.kill();
-        }
-      });
-    };
-  }, []);
-
   return (
-    <div className="min-h-screen py-10 sm:py-16">
+    <div className="ct-container ct-section">
       {/* HERO */}
-      <header 
-        ref={sectionRef}
-        className="px-auto max-w-9xl md:max-w-7xl mx-auto mb-12 sm:mb-20"
+      <header
+        className=" mb-12 sm:mb-20"
       >
         <div className="flex flex-col lg:flex-row justify-between gap-8">
-          <h1 
-            ref={headingRef}
-            className="
+          <h2
+            className="ct-section-title
               text-white font-bold leading-tight
               text-3xl sm:text-4xl md:text-5xl lg:text-6xl
               text-center lg:text-left
@@ -142,17 +59,16 @@ const ServicesPage = () => {
             "
           >
             What Are The Services We Offer?
-          </h1>
+          </h2>
 
-          <p 
-            ref={quoteRef}
+          <p
             className="
               text-muted
               text-sm sm:text-base md:text-lg
               max-w-lg
               text-center lg:text-right
               leading-relaxed
-              opacity-0
+
             "
           >
             “Excellence is not an act, but a habit. It is achieved through discipline,
@@ -165,7 +81,7 @@ const ServicesPage = () => {
       </header>
 
       {/* SERVICES GRID */}
-      <section className="px-auto max-w-9xl md:max-w-7xl mx-auto">
+      <section className="">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {services.map((service, index) => (
             <div
@@ -176,7 +92,7 @@ const ServicesPage = () => {
                 rounded-xl
                 p-4 sm:p-6
                 hover:bg-white/10
-                hover:-translate-y-1
+
                 transition
               "
             >
@@ -203,7 +119,7 @@ const ServicesPage = () => {
                 {service.longDescription}
               </p>
 
-          
+
             </div>
           ))}
         </div>

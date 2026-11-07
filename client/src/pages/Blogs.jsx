@@ -123,7 +123,7 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
   //  Standalone mode — full editorial blog index
   // ============================================================
   return (
-    <main className="min-h-screen pt-28 pb-24 px-6 sm:px-10 max-w-7xl mx-auto">
+    <div className="ct-container min-h-screen ct-page-content">
       <SEO
         title="Blog"
         description="Stories, tutorials, and behind-the-scenes notes on design, web development, and building digital products."
@@ -132,7 +132,7 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
       {/* Header */}
       <header className="mb-14 sm:mb-20">
       
-        <h1 className="text-white font-bold leading-[1.05] text-4xl sm:text-5xl md:text-6xl lg:text-7xl max-w-4xl">
+        <h1 className="ct-page-heading text-white font-bold leading-[1.05] text-4xl sm:text-5xl md:text-6xl lg:text-7xl max-w-4xl">
           This is where we tell&nbsp;stories.
           <br />
           <span className="text-white/70">
@@ -154,17 +154,10 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
                   setActiveCategory(cat);
                   setVisibleCount(PAGE_SIZE);
                 }}
-                className={`relative pb-1 text-sm sm:text-base font-medium transition ${
-                  active ? 'text-white' : 'text-muted hover:text-white/80'
-                }`}
+                aria-pressed={active}
+                className={`ct-filter ${active ? 'ct-filter-active' : ''}`}
               >
                 {cat}
-                {active && (
-                  <span
-                    className="absolute -bottom-[7px] left-0 right-0 h-[2px] bg-yellow-400"
-                    aria-hidden="true"
-                  />
-                )}
               </button>
             );
           })}
@@ -219,7 +212,7 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
               <button
                 type="button"
                 onClick={() => setVisibleCount((n) => n + PAGE_SIZE)}
-                className="px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/15 rounded-full text-white text-sm font-medium transition"
+                className="ct-button ct-button-tertiary"
               >
                 Load more
               </button>
@@ -230,7 +223,7 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
 
       {/* Newsletter strip */}
       <NewsletterStrip />
-    </main>
+    </div>
   );
 };
 
@@ -249,7 +242,7 @@ const BlogCard = ({ post }) => {
             <LazyImage
               src={cover}
               alt={post.coverImage?.alt || post.title}
-              className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+              className="w-full h-full object-cover transition-transform duration-200 ease-out"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-white/30 text-sm">

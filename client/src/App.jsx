@@ -42,8 +42,9 @@ const AdminContacts = lazy(() => import('./pages/admin/AdminContacts'));
  */
 const PublicShell = ({ children }) => (
   <>
+    <a className="ct-skip-link" href="#main-content">Skip to content</a>
     <Navbar />
-    {children}
+    <main id="main-content" tabIndex={-1}>{children}</main>
     <Bookcall />
     <Footer />
   </>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Logo from '../assets/tklogo.png'
-import { 
-  FaRegEnvelope, 
-  FaMapMarkerAlt, 
+import {
+  FaRegEnvelope,
+  FaMapMarkerAlt,
   FaPaperPlane,
   FaFacebook,
   FaLinkedin,
@@ -81,19 +81,19 @@ const Contact = () => {
       />
 
       {/* HEADER SECTION - Same as Hero.jsx */}
-      <div className="py-10 sm:py-1">
-        <section className="flex flex-col items-start justify-start px-4 md:px-24 py-8 relative">
-          <div className="max-w-6xl w-full p-6 sm:p-8 md:p-16 pt-24 md:pt-32">
+      <div className="ct-page-header">
+        <section className="ct-container">
+          <div className="w-full">
             <div className="flex flex-col items-start text-left bg">
-              
-              <h1 className="
+
+              <h1 className="ct-page-heading
                 text-white font-bold leading-tight
                 text-3xl sm:text-4xl md:text-5xl lg:text-6xl
                 mb-6
               ">
                 Let's Build Something Amazing
               </h1>
-              
+
               <p className="
                 text-white/70
                 text-base sm:text-lg md:text-xl
@@ -108,10 +108,10 @@ const Contact = () => {
       </div>
 
       {/* MAIN CONTENT */}
-      <section className='bg-gray-900/95 py-20 rounded-tl-4xl rounded-tr-4xl'>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className='bg-gray-900/95 ct-section rounded-tl-3xl rounded-tr-3xl'>
+        <div className="ct-container">
         <div className="flex flex-col-reverse lg:flex-row gap-8 lg:gap-12">
-          
+
           {/* LEFT COLUMN - CONTACT INFO (Shows second on mobile) */}
           <div className="lg:w-1/2 space-y-8">
             {/* Why Choose Us Card */}
@@ -201,7 +201,7 @@ const Contact = () => {
                 Lagos, Nigeria<br />
                 Available for worldwide projects
               </p>
-              
+
               <div className="flex items-center gap-3 mb-4">
                 <FaRegEnvelope className="w-5 h-5 text-white" />
                 <h4 className="text-white font-medium">Get in Touch</h4>
@@ -279,8 +279,8 @@ const Contact = () => {
                     className="ct-field
                       w-full
                       px-4 py-3
-                      backdrop-blur-xl 
-                     
+                      backdrop-blur-xl
+
                       rounded-xl
                       text-white
                       placeholder:text-muted
@@ -306,8 +306,8 @@ const Contact = () => {
                     className="ct-field
                       w-full
                       px-4 py-3
-                      backdrop-blur-xl 
-                     
+                      backdrop-blur-xl
+
                       rounded-xl
                       text-white
                       placeholder:text-muted
@@ -333,8 +333,8 @@ const Contact = () => {
                   className="ct-field
                      w-full
                       px-4 py-3
-                      backdrop-blur-xl 
-                     
+                      backdrop-blur-xl
+
                       rounded-xl
                       text-white
                       placeholder:text-muted
@@ -360,8 +360,8 @@ const Contact = () => {
                   className="ct-field
                     w-full
                       px-4 py-3
-                      backdrop-blur-xl 
-                     
+                      backdrop-blur-xl
+
                       rounded-xl
                       text-white
                       placeholder:text-muted
@@ -435,7 +435,7 @@ const Contact = () => {
             overflow-hidden
           ">
             <div className="flex flex-col lg:flex-row">
-              
+
               {/* LEFT SIDE - SOCIALS */}
               <div className="
                 lg:w-1/2
@@ -450,7 +450,7 @@ const Contact = () => {
                 ">
                   Connect With Us
                 </h3>
-                
+
                 <p className="
                   text-muted
                   text-base sm:text-lg
@@ -459,7 +459,7 @@ const Contact = () => {
                 ">
                   Follow for updates, insights, and behind-the-scenes looks at our latest projects.
                 </p>
-                
+
                 <div className="grid grid-cols-3 gap-4">
                   {socialLinks.map((social, index) => (
                     <a
@@ -502,7 +502,7 @@ const Contact = () => {
                   ))}
                 </div>
               </div>
-              
+
               {/* RIGHT SIDE - LOGO */}
               <div className="
                 lg:w-1/2
@@ -519,7 +519,7 @@ const Contact = () => {
                   ">
                     <img src={Logo} alt="Crownatech Logo" className="w-full h-full object-contain" />
                   </div>
-                  
+
                   <h2 className="
                     text-white
                     text-3xl sm:text-4xl md:text-5xl
@@ -529,7 +529,7 @@ const Contact = () => {
                   ">
                     CrownaTech
                   </h2>
-                  
+
                   <p className="text-muted text-sm">
                     Building digital excellence since 2019
                   </p>

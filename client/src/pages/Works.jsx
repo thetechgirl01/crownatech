@@ -53,28 +53,30 @@ const Works = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 pt-32 max-w-7xl mx-auto">
+    <div className="min-h-screen ct-page-content">
       <SEO
         title="Works"
         description="Selected projects from CrownaTech — websites, ecommerce platforms, brand systems, and more."
       />
 
-      <header className="px-4 mb-20 mt-20">
-        <h1 className="text-white font-bold leading-tight max-w-5xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-1 bg">
+      <div className="ct-container">
+      <header className="mb-12 sm:mb-16">
+        <h1 className="ct-page-heading text-white font-bold leading-tight max-w-5xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-1 bg">
           We help businesses achieve their goals. By solving real, meaningful problems.
         </h1>
       </header>
 
       {/* Filters */}
-      <div className="bg mb-10 px-4 p">
-        <div className="space-x-6 space-y-4">
+      <div className="bg mb-10">
+        <div className="flex flex-wrap gap-3">
           {industries.map((item) => (
             <button
               key={item}
               onClick={() => handleIndustryClick(item)}
-              className={`text-2xl transition ${
+              aria-pressed={selectedIndustries.includes(item)}
+              className={`ct-filter ${
                 selectedIndustries.includes(item)
-                  ? 'text-gray-500'
+                  ? 'ct-filter-active'
                   : 'text-white hover:text-yellow-400'
               }`}
             >
@@ -85,7 +87,7 @@ const Works = () => {
       </div>
 
       {/* Grid */}
-      <main className="px-4">
+      <section aria-label="Selected projects">
         {loading ? (
           <CardGridSkeleton count={6} />
         ) : error ? (
@@ -137,7 +139,8 @@ const Works = () => {
             ))}
           </div>
         )}
-      </main>
+      </section>
+      </div>
 
       <Contact />
     </div>
@@ -153,7 +156,7 @@ const ProjectCard = ({ project }) => {
   const isStock = project.kind === 'stock';
   const ext = project.externalLink;
   return (
-    <div className="relative min-w-[320px] mt-20">
+    <div className="relative min-w-0 w-full mt-8 lg:mt-20">
       <Link to={`/projects/${project.slug}`} aria-label={`View ${project.title}`}>
         <div
           className="relative h-[480px] rounded-3xl overflow-hidden group cursor-pointer"
@@ -166,7 +169,7 @@ const ProjectCard = ({ project }) => {
             <LazyImage
               src={project.heroImage.url}
               alt={project.title}
-              className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500"
+              className="absolute inset-0 w-full h-full object-cover opacity-80  transition duration-200"
             />
           ) : (
             <div className="absolute inset-0 bg-white/5" />
@@ -181,7 +184,7 @@ const ProjectCard = ({ project }) => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={isStock ? 'Buy script' : 'Visit live site'}
-          className="absolute top-2 right-2 w-20 h-14 sm:w-20 sm:h-12 md:w-24 md:h-14 lg:w-28 lg:h-16 rounded-lg bg-yellow-500 flex items-center justify-center shadow-lg hover:scale-110 transition z-10"
+          className="absolute top-2 right-2 w-20 h-14 sm:w-20 sm:h-12 md:w-24 md:h-14 lg:w-28 lg:h-16 rounded-lg bg-yellow-500 flex items-center justify-center shadow-lg  transition z-10"
         >
           <HiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-black" />
         </a>
@@ -189,7 +192,7 @@ const ProjectCard = ({ project }) => {
         <Link
           to={`/projects/${project.slug}`}
           aria-label="View project"
-          className="absolute top-2 right-2 w-20 h-14 sm:w-20 sm:h-12 md:w-24 md:h-14 lg:w-28 lg:h-16 rounded-lg bg-yellow-500 flex items-center justify-center shadow-lg hover:scale-110 transition z-10"
+          className="absolute top-2 right-2 w-20 h-14 sm:w-20 sm:h-12 md:w-24 md:h-14 lg:w-28 lg:h-16 rounded-lg bg-yellow-500 flex items-center justify-center shadow-lg  transition z-10"
         >
           <HiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-black" />
         </Link>

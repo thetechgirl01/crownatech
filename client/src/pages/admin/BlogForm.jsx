@@ -261,15 +261,15 @@ const baseInput =
 
 const Field = ({ label, ...rest }) => (
   <div>
-    <label className="block text-white/70 text-sm mb-2">{label}</label>
-    <input className={baseInput} {...rest} />
+    <label htmlFor={rest.id || rest.name} className="block text-white/70 text-sm mb-2">{label}</label>
+    <input id={rest.id || rest.name} className={baseInput} {...rest} />
   </div>
 );
 
 const Textarea = ({ label, ...rest }) => (
   <div>
-    <label className="block text-white/70 text-sm mb-2">{label}</label>
-    <textarea className={`${baseInput} resize-none`} {...rest} />
+    <label htmlFor={rest.id || rest.name} className="block text-white/70 text-sm mb-2">{label}</label>
+    <textarea id={rest.id || rest.name} className={`${baseInput} resize-none`} {...rest} />
   </div>
 );
 

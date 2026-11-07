@@ -1,58 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { FaRocket, FaUsers, FaAward, FaLightbulb } from 'react-icons/fa';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
 
 const AboutUs = () => {
-  const aboutRef = useRef(null);
-  const sectionRefs = useRef([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Header animation
-      gsap.from(".about-header", {
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        delay: 0.2,
-        ease: "power3.out"
-      });
-
-      // Stats cards staggered animation
-      gsap.from(".stat-card", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        delay: 0.4,
-        ease: "power3.out"
-      });
-
-      // Content sections animation
-      sectionRefs.current.forEach((section, index) => {
-        if (section) {
-          gsap.from(section, {
-            y: 80,
-            opacity: 0,
-            duration: 1,
-            scrollTrigger: {
-              trigger: section,
-              start: "top 80%",
-              end: "top 50%",
-              toggleActions: "play none none reverse"
-            },
-            ease: "power3.out"
-          });
-        }
-      });
-
-    }, aboutRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const stats = [
     { icon: <FaRocket className="w-6 h-6" />, value: "100+", label: "Projects Delivered" },
@@ -100,29 +51,29 @@ const AboutUs = () => {
   ];
 
   return (
-    <div ref={aboutRef} className="min-h-screen">
-      
+    <div className="min-h-screen">
+
       {/* HERO SECTION - Same as Hero.jsx */}
-      <div className="py-10 sm:py-1">
-        <section className="flex flex-col items-start justify-start px-4 md:px-24 py-8 relative">
-          <div className="max-w-6xl w-full p-6 sm:p-8 md:p-16 pt-24 md:pt-32">
+      <div className="ct-page-header">
+        <section className="ct-container">
+          <div className="w-full">
             <div className="about-header flex flex-col items-start text-left">
-              
-              <h1 className="
+
+              <h1 className="ct-page-heading
                 text-white font-bold leading-tight
                 text-3xl sm:text-4xl md:text-5xl lg:text-6xl
                 mb-6
               ">
                 Building Digital Excellence
               </h1>
-              
+
               <p className="
                 text-white/70
                 text-base sm:text-lg md:text-xl
                 leading-relaxed max-w-3xl mb-12
               ">
-                We are a passionate team of web developers and designers dedicated to creating 
-                exceptional digital experiences. Based in Lagos, Nigeria, we serve clients 
+                We are a passionate team of web developers and designers dedicated to creating
+                exceptional digital experiences. Based in Lagos, Nigeria, we serve clients
                 worldwide with cutting-edge web solutions.
               </p>
 
@@ -132,7 +83,6 @@ const AboutUs = () => {
                   <div
                     key={index}
                     className="stat-card"
-                    ref={el => sectionRefs.current[index] = el}
                   >
                     <div className="
                       backdrop-blur-xl bg-white/5
@@ -170,10 +120,10 @@ const AboutUs = () => {
       </div>
 
       {/* REST OF THE CONTENT - Full width */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="ct-container">
 
         {/* OUR APPROACH SECTION */}
-        <section className="mb-16 md:mb-24" ref={el => sectionRefs.current[4] = el}>
+        <section className="mb-16 md:mb-24">
           <div className="mb-8">
             <h2 className="
               text-white
@@ -230,7 +180,7 @@ const AboutUs = () => {
         </section>
 
         {/* SERVICES SECTION */}
-        <section className="mb-16 md:mb-24" ref={el => sectionRefs.current[5] = el}>
+        <section className="mb-16 md:mb-24">
           <div className="mb-8">
             <h2 className="
               text-white
@@ -280,7 +230,7 @@ const AboutUs = () => {
         </section>
 
         {/* WHY CHOOSE US SECTION */}
-        <section className="mb-16 md:mb-24" ref={el => sectionRefs.current[6] = el}>
+        <section className="mb-16 md:mb-24">
           <div className="
             backdrop-blur-xl bg-white/5
             border border-white/10
@@ -313,7 +263,7 @@ const AboutUs = () => {
                 ">
                   We combine technical expertise with creative thinking to deliver solutions that not only look great but perform exceptionally. Every project is treated as a partnership, with clear communication and transparent processes from start to finish.
                 </p>
-                
+
                 <p className="
                   text-white/70
                   text-base sm:text-lg
@@ -322,7 +272,7 @@ const AboutUs = () => {
                   Our commitment to quality and attention to detail ensures that we deliver solutions that are scalable, maintainable, and aligned with your long-term business goals.
                 </p>
               </div>
-              
+
               <div className="space-y-4">
                 <div className="
                   p-4
@@ -335,7 +285,7 @@ const AboutUs = () => {
                     Clean code, modern frameworks, and scalable architecture
                   </p>
                 </div>
-                
+
                 <div className="
                   p-4
                   backdrop-blur-xl bg-white/5
@@ -347,7 +297,7 @@ const AboutUs = () => {
                     Your goals are our priority, with regular updates and collaboration
                   </p>
                 </div>
-                
+
                 <div className="
                   p-4
                   backdrop-blur-xl bg-white/5

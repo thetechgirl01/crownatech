@@ -31,15 +31,15 @@ const Store = () => {
   }, []);
 
   return (
-    <div className="min-h-screen pt-24 md:pt-32 pb-24">
+    <div className="min-h-screen ct-page-content">
       <SEO
         title="Store"
         description="Buy ready-made scripts, templates, and stock projects from CrownaTech."
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="ct-container">
         <header className="mb-14">
-          <h1 className="text-white font-bold leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4">
+          <h1 className="ct-page-heading text-white font-bold leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4">
             Ready-to-launch templates &amp; scripts
           </h1>
           <p className="text-white/70 text-base sm:text-lg md:text-xl max-w-3xl">
@@ -83,12 +83,12 @@ const StoreCard = ({ item }) => {
 
   return (
     <article className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-yellow-400/40 transition-colors group flex flex-col">
-      <Link to={detailLink} className="block relative aspect-[16/10] overflow-hidden">
+      <Link to={detailLink} aria-label={`View ${item.title}`} className="block relative aspect-[16/10] overflow-hidden">
         {item.heroImage?.url ? (
           <LazyImage
             src={item.heroImage.url}
             alt={item.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover  transition-transform duration-200"
           />
         ) : (
           <div className="w-full h-full bg-white/5" />

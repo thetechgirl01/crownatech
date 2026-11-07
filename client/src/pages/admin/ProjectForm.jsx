@@ -597,23 +597,23 @@ const baseInput =
 
 const Field = ({ label, hint, ...rest }) => (
   <div>
-    <label className="block text-white/70 text-sm mb-2">{label}</label>
-    <input className={baseInput} {...rest} />
+    <label htmlFor={rest.id || rest.name} className="block text-white/70 text-sm mb-2">{label}</label>
+    <input id={rest.id || rest.name} className={baseInput} {...rest} />
     {hint && <p className="text-muted text-xs mt-1">{hint}</p>}
   </div>
 );
 
 const Textarea = ({ label, ...rest }) => (
   <div>
-    <label className="block text-white/70 text-sm mb-2">{label}</label>
-    <textarea className={`${baseInput} resize-none`} {...rest} />
+    <label htmlFor={rest.id || rest.name} className="block text-white/70 text-sm mb-2">{label}</label>
+    <textarea id={rest.id || rest.name} className={`${baseInput} resize-none`} {...rest} />
   </div>
 );
 
 const Select = ({ label, options, ...rest }) => (
   <div>
-    <label className="block text-white/70 text-sm mb-2">{label}</label>
-    <select className={baseInput} {...rest}>
+    <label htmlFor={rest.id || rest.name} className="block text-white/70 text-sm mb-2">{label}</label>
+    <select id={rest.id || rest.name} className={baseInput} {...rest}>
       {options.map((o) => {
         const value = typeof o === 'string' ? o : o.value;
         const text = typeof o === 'string' ? o : o.label;

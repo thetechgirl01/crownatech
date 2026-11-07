@@ -137,7 +137,7 @@ const BlogContentPage = () => {
 
   if (error || !post) {
     return (
-      <main className="min-h-screen pt-32 pb-24 px-6">
+      <div className="min-h-screen pt-32 pb-24 px-6">
         <EmptyState
           title="Post not found"
           message={error || "This story doesn't exist or was removed."}
@@ -151,7 +151,7 @@ const BlogContentPage = () => {
             </Link>
           }
         />
-      </main>
+      </div>
     );
   }
 
@@ -164,7 +164,7 @@ const BlogContentPage = () => {
       />
 
       {/* Top bar — back link */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 mb-8">
+      <div className="ct-container mb-8">
         <Link
           to="/blogs"
           className="inline-flex items-center gap-2 text-muted hover:text-white text-sm transition"
@@ -189,7 +189,7 @@ const BlogContentPage = () => {
           </div>
         )}
 
-        <h1 className="text-white font-bold text-3xl sm:text-4xl md:text-5xl leading-[1.15] mb-6">
+        <h1 className="ct-page-heading text-white font-bold text-3xl sm:text-4xl md:text-5xl leading-[1.15] mb-6">
           {post.title}
         </h1>
 
@@ -349,7 +349,7 @@ const BlogContentPage = () => {
 
       {/* Related posts */}
       {related.length > 0 && (
-        <section className="max-w-7xl mx-auto px-6 sm:px-10 mt-24 pt-16 border-t border-white/10">
+        <section className="ct-container mt-24 pt-16 border-t border-white/10">
           <div className="flex items-end justify-between mb-10">
             <h2 className="text-white text-2xl sm:text-3xl font-bold">
               Keep reading
@@ -374,7 +374,7 @@ const BlogContentPage = () => {
                     <LazyImage
                       src={p.coverImage.url}
                       alt={p.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover  transition-transform duration-200"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-white/30 text-sm">

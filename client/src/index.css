@@ -13,11 +13,11 @@
 }
 :root {
   /* colors */
-  --primary-color: #011936;
-  --secondary-color: #1E293B;
-  --accent-color: #E5E7EB;
-  --primary-text: #E5E7EB;
-  --secondary-text: #daa520;
+  --primary-color: var(--brand-blue);
+  --secondary-color: var(--surface);
+  --accent-color: var(--text);
+  --primary-text: var(--text);
+  --secondary-text: var(--brand-gold);
 
   /* fonts */
   --font-h1: 'gotu', sans-serif;
@@ -51,13 +51,13 @@ body {
 
 }
 .yellow {
-  background-color: goldenrod;
+  background-color: var(--brand-gold);
 }
 .blue {
-  background-color: #011936;
+  background-color: var(--brand-blue);
 }
 .yellow-text:hover {
-color: goldenrod;
+color: var(--brand-gold);
 }
 
 /* Smooth scrolling */
@@ -931,3 +931,29 @@ form label { font-size: .875rem; font-weight: 500; }
 .ct-consult-dialog { position: fixed; z-index: 120; bottom: 5.75rem; right: 1rem; width: calc(100% - 2rem); max-width: 24rem; max-height: calc(100dvh - 7rem); overflow-y: auto; overscroll-behavior: contain; padding: 1.5rem; }
 @media (max-width: 63.99rem) { .ct-footer-body { grid-template-columns: 1fr 1fr; gap: 2.5rem; } .ct-footer-body > :last-child { grid-column: 1 / -1; max-width: 32rem; } }
 @media (max-width: 39.99rem) { .ct-footer-body { grid-template-columns: 1fr; } .ct-footer-bottom { align-items: flex-start; flex-direction: column; } }
+
+/* Page rhythm and content-first motion. Custom card clipping/stagger stays local. */
+.ct-page-header { padding-top: clamp(7.5rem, 12vw, 10rem); padding-bottom: var(--section-space); }
+.ct-page-content { padding-top: clamp(7.5rem, 12vw, 10rem); padding-bottom: var(--section-space); }
+.ct-home-hero { display: flex; align-items: center; min-height: 85svh; padding-top: 8rem; padding-bottom: var(--section-space); }
+.ct-hero-wordmark { display: inline-block; font-family: var(--font-h2); border-bottom: 2px solid var(--brand-gold); padding-bottom: .35rem; }
+.ct-section-title { font: 500 clamp(1.75rem, 3.5vw, 3rem)/1.25 var(--font-h1); letter-spacing: -.025em; }
+.ct-filter { min-height: 2.75rem; padding: .6rem 1rem; border: 1px solid var(--border); border-radius: 999px; font-size: .875rem; color: var(--text-muted); transition: background-color var(--motion-duration), border-color var(--motion-duration); }
+.ct-filter:hover { border-color: var(--brand-gold); color: #fff; }
+.ct-filter-active { border-color: var(--brand-gold); background: var(--brand-gold); color: #0a0a0a; }
+.ct-filter-active:hover { color: #0a0a0a; }
+.ct-faq-item { border: 1px solid var(--border); background: rgb(255 255 255 / 4%); border-radius: var(--radius-control); }
+.ct-faq-item[open] { border-color: var(--brand-gold); }
+.ct-faq-item summary { display: flex; align-items: center; gap: 1rem; padding: 1.25rem; list-style: none; color: var(--text); font-family: var(--font-h2); font-weight: 500; }
+.ct-faq-item summary::-webkit-details-marker { display: none; }
+.ct-faq-number { font: 500 .75rem var(--font-h3); color: var(--brand-gold); }
+.ct-faq-chevron { flex-shrink: 0; width: 1rem; transition: transform var(--motion-duration); }
+.ct-faq-item[open] .ct-faq-chevron { transform: rotate(180deg); }
+.ct-faq-answer { padding: 0 1.25rem 1.5rem; color: var(--text-muted); line-height: 1.75; }
+@media (min-width: 40rem) { .ct-faq-item summary { padding: 1.5rem; } .ct-faq-answer { padding-inline: 1.5rem; } }
+.ct-light-section :focus-visible { outline-color: var(--brand-blue); }
+.ct-skip-link { position: fixed; z-index: 300; top: .5rem; left: 1rem; padding: .75rem 1.25rem; background: #fff; color: var(--brand-blue); border-radius: 999px; transform: translateY(-200%); }
+.ct-skip-link:focus { transform: translateY(0); color: var(--brand-blue); }
+.ct-carousel-dot { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 999px; }
+.ct-carousel-dot:hover { background: rgb(255 255 255 / 6%); }
+@media (prefers-reduced-motion: reduce) { .case-study-hero, .full-width-image-block { background-attachment: scroll; } }
