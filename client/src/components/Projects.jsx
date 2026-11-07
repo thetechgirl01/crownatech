@@ -148,22 +148,39 @@ const Projects = () => {
 
   const scrollTo = (index) => {
     if (!scrollRef.current) return;
-    const cardWidth = 340;
-    scrollRef.current.scrollTo({ left: index * cardWidth, behavior: "smooth" });
+    const carousel = scrollRef.current;
+    const card = carousel.children[index];
+    if (!card) return;
+    const left = card.getBoundingClientRect().left
+      - carousel.getBoundingClientRect().left + carousel.scrollLeft;
+    carousel.scrollTo({ left, behavior: "smooth" });
   };
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
-    const cardWidth = 340;
-    const index = Math.round(scrollRef.current.scrollLeft / cardWidth);
-    setActive(index);
+    const carousel = scrollRef.current;
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+    const firstCard = carousel.children[0];
+    if (!firstCard) return;
+    const firstLeft = firstCard.getBoundingClientRect().left;
+    let nearest = 0;
+    let distance = Infinity;
+    Array.from(carousel.children).forEach((card, index) => {
+      const target = Math.min(card.getBoundingClientRect().left - firstLeft, maxScroll);
+      const currentDistance = Math.abs(carousel.scrollLeft - target);
+      if (currentDistance < distance || (maxScroll > 0 && currentDistance === distance)) {
+        nearest = index;
+        distance = currentDistance;
+      }
+    });
+    setActive(nearest);
   };
 
   return (
     <section ref={sectionRef} className="px-auto py-24 max-w-7xl mx-auto">
       <div className="flex flex-col lg:flex-row gap-16">
         {/* LEFT — TEXTS */}
-        <div className="lg:w-1/3">
+        <div className="min-w-0 lg:w-1/3">
           <h1 className="text-4xl sm:text-5xl font-bold leading-tight text-white">
             Real projects.
             <span ref={spanRef} className="block"> Real results.</span>
@@ -175,7 +192,7 @@ const Projects = () => {
         </div>
 
         {/* RIGHT — SKILLS + CARDS */}
-        <div className="lg:w-2/3 relative">
+        <div className="min-w-0 lg:w-2/3 relative">
           {/* Animated skills strip */}
           <div className="overflow-hidden mb-8">
             <div className="flex animate-scroll whitespace-nowrap uppercase text-gray-300 text-sm">
@@ -198,17 +215,17 @@ const Projects = () => {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-6 overflow-x-auto scroll-smooth pb-6 hide-scrollbar"
+            className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6 hide-scrollbar"
           >
             {loading ? (
               Array.from({ length: 3 }).map((_, i) => (
                 <div
                   key={i}
-                  className="min-w-[320px] h-[380px] rounded-3xl bg-white/5 border border-white/10 animate-pulse"
+                  className="w-[320px] max-w-full shrink-0 snap-start h-[380px] rounded-3xl bg-white/5 border border-white/10 animate-pulse"
                 />
               ))
             ) : projects.length === 0 ? (
-              <div className="min-w-[320px] h-[380px] rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 text-sm px-6 text-center">
+              <div className="w-[320px] max-w-full shrink-0 snap-start h-[380px] rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 text-sm px-6 text-center">
                 Featured projects will appear here.
               </div>
             ) : (
@@ -254,7 +271,7 @@ const ProjectCard = ({ project }) => {
   const detailHref = `/projects/${project.slug}`;
   const ext = project.externalLink;
   return (
-    <div className="relative min-w-[320px]">
+    <div className="relative w-[320px] max-w-full shrink-0 snap-start">
       <Link to={detailHref} aria-label={`View ${project.title}`}>
         <div
           className="relative h-[380px] rounded-3xl overflow-hidden bg-black group cursor-pointer"
