@@ -1,3 +1,4 @@
+import { publicProjectLink } from '../utils/publicLinks';
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { HiArrowUpRight } from 'react-icons/hi2';
@@ -52,7 +53,8 @@ const ProjectDetail = () => {
   }
 
   const isStock = project.kind === 'stock';
-  const ctaLabel = isStock
+  const externalLink = publicProjectLink(project.externalLink);
+  const ctaLabel = !externalLink ? 'Ask about this project' : isStock
     ? `Buy Script${project.price ? ` · ${project.currency} ${project.price}` : ''}`
     : 'Visit Live Site';
 
@@ -111,9 +113,9 @@ const ProjectDetail = () => {
         {project.externalLink && (
           <div className="mb-16 flex flex-wrap gap-4">
             <a
-              href={project.externalLink}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={externalLink || '/contact'}
+              target={externalLink ? '_blank' : undefined}
+              rel={externalLink ? 'noopener noreferrer' : undefined}
               className="ct-button ct-button-primary cursor-pointer inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-8 rounded-full hover:bg-yellow-500  transition-all duration-300"
             >
               {ctaLabel}
@@ -189,14 +191,14 @@ const ProjectDetail = () => {
               {isStock ? 'Get this for your project' : 'See it in action'}
             </h3>
             <p className="text-muted mb-8 max-w-xl mx-auto">
-              {isStock
+              {!externalLink ? 'Contact us for availability and purchase information.' : isStock
                 ? 'Click below to head to checkout. Payment is handled by our gateway provider.'
                 : 'Click below to visit the live site we built.'}
             </p>
             <a
-              href={project.externalLink}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={externalLink || '/contact'}
+              target={externalLink ? '_blank' : undefined}
+              rel={externalLink ? 'noopener noreferrer' : undefined}
               className="ct-button ct-button-primary inline-flex items-center gap-3 bg-yellow-400 text-black font-semibold py-4 px-10 rounded-full hover:bg-yellow-500  transition-all duration-300"
             >
               {ctaLabel}

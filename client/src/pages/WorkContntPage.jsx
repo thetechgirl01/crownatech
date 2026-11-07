@@ -46,7 +46,7 @@ const WorkContentPage = () => {
 
     
     demoLink: 'https://demo.example.com',
-    buyLink: 'https://buy.stripe.com/test_123456'
+    buyLink: '/contact'
   };
 
   // GSAP animations

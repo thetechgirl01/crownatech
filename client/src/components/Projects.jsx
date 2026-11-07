@@ -1,3 +1,4 @@
+import { publicProjectLink } from '../utils/publicLinks';
 import WebsiteTypes from './WebsiteTypes';
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { HiArrowUpRight } from "react-icons/hi2";
@@ -185,7 +186,7 @@ const Projects = () => {
 
 const ProjectCard = ({ project }) => {
   const detailHref = `/projects/${project.slug}`;
-  const ext = project.externalLink;
+  const ext = publicProjectLink(project.externalLink);
   return (
     <div className="relative w-[320px] max-w-full shrink-0 snap-start">
       <Link to={detailHref} aria-label={`View ${project.title}`}>

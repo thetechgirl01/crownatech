@@ -1,3 +1,4 @@
+import { publicProjectLink } from '../utils/publicLinks';
 import React, { useEffect, useMemo, useState } from 'react';
 import { HiArrowUpRight } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
@@ -154,7 +155,7 @@ const Works = () => {
  */
 const ProjectCard = ({ project }) => {
   const isStock = project.kind === 'stock';
-  const ext = project.externalLink;
+  const ext = publicProjectLink(project.externalLink);
   return (
     <div className="relative min-w-0 w-full mt-8 lg:mt-20">
       <Link to={`/projects/${project.slug}`} aria-label={`View ${project.title}`}>

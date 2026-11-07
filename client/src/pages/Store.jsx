@@ -1,3 +1,4 @@
+import { publicProjectLink } from '../utils/publicLinks';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HiArrowUpRight } from 'react-icons/hi2';
@@ -54,8 +55,8 @@ const Store = () => {
           <EmptyState title="Couldn't load store" message={error} />
         ) : items.length === 0 ? (
           <EmptyState
-            title="The shelves are empty"
-            message="No items are listed for sale right now. Check back soon."
+            title="Digital products, in preparation"
+            message="No products are listed yet. Explore our work while we prepare this space for scripts and digital products."
             action={
               <Link
                 to="/works"
@@ -79,7 +80,8 @@ const Store = () => {
 
 const StoreCard = ({ item }) => {
   const detailLink = `/projects/${item.slug}`;
-  const buyLink = item.externalLink || detailLink;
+  const purchaseLink = publicProjectLink(item.externalLink);
+  const buyLink = purchaseLink || detailLink;
 
   return (
     <article className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-yellow-400/40 transition-colors group flex flex-col">
@@ -110,7 +112,7 @@ const StoreCard = ({ item }) => {
           <p className="text-muted text-sm mb-4 line-clamp-2">{item.tagline}</p>
         )}
 
-        <div className="mt-auto flex items-center justify-between gap-3 pt-4">
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4">
           <div>
             {item.price ? (
               <div>
@@ -125,10 +127,10 @@ const StoreCard = ({ item }) => {
           </div>
           <a
             href={buyLink}
-            {...(item.externalLink ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            {...(purchaseLink ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             className="ct-button ct-button-primary inline-flex items-center gap-2 px-4 py-2.5 bg-yellow-400 text-black rounded-full font-semibold text-sm hover:bg-yellow-500 transition"
           >
-            Buy
+            {purchaseLink ? 'Buy' : 'View details'}
             <HiArrowUpRight className="w-4 h-4" />
           </a>
         </div>

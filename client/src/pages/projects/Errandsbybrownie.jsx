@@ -51,7 +51,7 @@ const Errandsbybrownie = () => {
 
     
     demoLink: 'https://www.errabdsbybrownie.com',
-    buyLink: 'https://buy.stripe.com/test_123456'
+    buyLink: '/contact'
   };
 
   // GSAP animations
