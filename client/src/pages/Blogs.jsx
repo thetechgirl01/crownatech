@@ -1,3 +1,4 @@
+import NewsletterSignup from '../components/common/NewsletterSignup';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HiOutlineSearch } from 'react-icons/hi';
@@ -294,59 +295,14 @@ const BlogCard = ({ post }) => {
 /* ------------------------------------------------------------
    Newsletter strip (purely visual — wire up later if you want)
    ------------------------------------------------------------ */
-const NewsletterStrip = () => {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (!email) return;
-    // Hook this up to an API route when you have one. For now: optimistic UI.
-    setSubmitted(true);
-    setEmail('');
-  };
-
-  return (
-    <section className="mt-24 pt-12 border-t border-white/10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
-        <div>
-          <h3 className="text-white text-2xl sm:text-3xl font-bold mb-2">
-            Subscribe to our blog
-          </h3>
-          <p className="text-muted text-sm">
-            Once a month we'll send you blog updates. No spam, ever.
-          </p>
-        </div>
-
-        {submitted ? (
-          <p className="text-yellow-400 text-sm self-end">
-            Thanks — you're on the list.
-          </p>
-        ) : (
-          <form
-            onSubmit={onSubmit}
-            className="flex items-center gap-3 border-b border-white/20 pb-2"
-          >
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your email"
-              className="ct-field flex-1 bg-transparent text-white placeholder:text-muted text-base focus:outline-none"
-              aria-label="Email address"
-            />
-            <button
-              type="submit"
-              className="text-white text-sm font-medium hover:text-yellow-400 transition whitespace-nowrap"
-            >
-              Subscribe →
-            </button>
-          </form>
-        )}
-      </div>
-    </section>
-  );
-};
+const NewsletterStrip = () => (
+  <section className="mt-20 pt-10 border-t border-white/10 grid gap-8 md:grid-cols-2">
+    <div>
+      <h2 className="text-white text-2xl sm:text-3xl font-semibold mb-3">Studio notes</h2>
+      <p className="text-muted">Keep up with our latest articles and projects.</p>
+    </div>
+    <NewsletterSignup />
+  </section>
+);
 
 export default Blogs;

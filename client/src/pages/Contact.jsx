@@ -265,11 +265,13 @@ const Contact = () => {
               {/* Name & Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
-                  <label className="block text-white/70 text-sm mb-2">
+                  <label htmlFor="contact-name" className="block text-white/70 text-sm mb-2">
                     Your Name *
                   </label>
                   <input
                     type="text"
+                    autoComplete="name"
+                    id="contact-name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
@@ -290,11 +292,13 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-white/70 text-sm mb-2">
+                  <label htmlFor="contact-email" className="block text-white/70 text-sm mb-2">
                     Email Address *
                   </label>
                   <input
                     type="email"
+                    autoComplete="email"
+                    id="contact-email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
@@ -317,12 +321,13 @@ const Contact = () => {
 
               {/* Budget */}
               <div className="mb-6">
-                <label className="block text-white/70 text-sm mb-2">
+                <label htmlFor="contact-budget" className="block text-white/70 text-sm mb-2">
                   Project Budget (Optional)
                 </label>
                 <input
                   type="text"
-                  name="budget"
+                  id="contact-budget"
+                    name="budget"
                   value={formData.budget}
                   onChange={handleInputChange}
                   className="ct-field
@@ -342,11 +347,12 @@ const Contact = () => {
 
               {/* Message */}
               <div className="mb-8">
-                <label className="block text-white/70 text-sm mb-2">
+                <label htmlFor="contact-message" className="block text-white/70 text-sm mb-2">
                   Project Details *
                 </label>
                 <textarea
-                  name="message"
+                  id="contact-message"
+                    name="message"
                   value={formData.message}
                   onChange={handleInputChange}
                   required

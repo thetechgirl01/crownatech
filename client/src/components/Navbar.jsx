@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from "react";
+import useDialog from '../hooks/useDialog';
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Tklogo from '../assets/tklogo.png';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef(null);
+  useDialog(isOpen, () => setIsOpen(false), menuRef);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -29,9 +33,9 @@ export default function Navbar() {
   ];
 
   const tools = [
-    'JavaScript', 'React', 'Node', 'Express', 
-    'Bootstrap', 'jQuery', 'PHP', 'MySQL', 
-    'MongoDB', 'Git', 'GitHub', 'Figma', 
+    'JavaScript', 'React', 'Node', 'Express',
+    'Bootstrap', 'jQuery', 'PHP', 'MySQL',
+    'MongoDB', 'Git', 'GitHub', 'Figma',
     'WordPress'
   ];
 
@@ -39,10 +43,10 @@ export default function Navbar() {
     <>
       {/* NAVBAR - Fixed with highest z-index */}
       <nav
-        className={`fixed w-full z-[100] transition-all duration-300 ${
+        className={`fixed w-full z-[100] transition-colors duration-200 ${
           scrolled
-            ? "bg-white/5 backdrop-blur-sm shadow-md text-black"
-            : "bg-transparent text-white  backdrop-blur-sm"
+            ? "bg-[#011936]/95 backdrop-blur-sm border-b border-white/10 text-white"
+            : "bg-[#011936]/80 text-white backdrop-blur-sm"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
@@ -58,15 +62,17 @@ export default function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="relative w-11 h-11 flex items-center justify-center rounded-full overflow-visible cursor-pointer"
-              aria-label="Toggle menu"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              aria-controls="site-menu"
             >
               {/* Animated White Circle Background */}
               <span
-                className={`absolute inset-0 rounded-full bg-white transition-all duration-500 ease-out ${
+                className={`absolute inset-0 rounded-full bg-white transition-all duration-200 ease-out ${
                   isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
                 }`}
               />
-              
+
               {/* Menu Icon Container */}
               <span className="relative w-6 h-5 flex items-center justify-center ">
                 {/* Two-line Hamburger Menu (when closed) */}
@@ -90,7 +96,7 @@ export default function Navbar() {
 
       {/* Overlay - Behind nav but above content */}
       <div
-        className={`fixed inset-0 z-[90] bg-black transition-opacity duration-500 ${
+        className={`fixed inset-0 z-[90] bg-black transition-opacity duration-200 ${
           isOpen
             ? "opacity-40 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -98,35 +104,32 @@ export default function Navbar() {
         onClick={() => setIsOpen(false)}
       />
 
-      {/* Slide Menu - 1/3 of screen width */}
+      {/* Slide-out navigation */}
       <aside
-        className={`fixed top-0 right-0 h-screen z-[95] bg-gray-900/95 backdrop-blur-md
-          transition-transform duration-700 ease-in-out
+        id="site-menu"
+        ref={menuRef}
+        inert={!isOpen}
+        role="dialog"
+        aria-modal={isOpen ? true : undefined}
+        aria-label="Site navigation"
+        tabIndex={-1}
+        className={`ct-menu fixed top-0 right-0 h-dvh z-[95] bg-[#011936]
+          transition-transform duration-200 ease-out
           ${isOpen ? "translate-x-0" : "translate-x-full"}
-          w-full md:w-1/3 
+          w-full md:w-[min(28rem,50vw)]
           overflow-y-auto overflow-x-hidden`}
       >
-        <div className="h-full flex flex-col items-start justify-center px-6 sm:px-8 md:px-10 mt-24">
-          {/* Navigation Links - Centered container */}
+        <div className="min-h-full flex flex-col items-start px-6 sm:px-8 py-24">
+          <button className="ct-button ct-button-tertiary mb-8" onClick={() => setIsOpen(false)}>Close navigation</button>
+          {/* Navigation Links */}
           <div className="w-full mx-auto">
             <ul className="space-y-6 md:space-y-8 w-full mb-12">
-              {navLinks.map((link, index) => (
+              {navLinks.map((link) => (
                 <li key={link.name} className="overflow-hidden">
                   <Link
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className="block text-2xl md:text-3xl font-light text-white 
-                             tracking-tight hover:text-yellow-300 
-                             transition-all duration-300 transform hover:translate-x-4
-                             hover:opacity-80"
-                    style={{
-                      transitionDelay: `${index * 100}ms`,
-                      transform: isOpen ? 'translateX(0)' : 'translateX(100px)',
-                      opacity: isOpen ? 1 : 0,
-                      transition: `transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 100}ms, 
-                                   opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 100}ms, 
-                                   color 0.3s ease`
-                    }}
+                    className="block py-1 text-2xl md:text-3xl font-light text-white hover:text-yellow-400 transition-colors duration-200"
                   >
                     {link.name}
                   </Link>
@@ -136,29 +139,15 @@ export default function Navbar() {
 
             {/* "What we bring to the table" Section */}
             <div className="w-full mb-10"
-              style={{
-                transitionDelay: `${navLinks.length * 100 + 200}ms`,
-                transform: isOpen ? 'translateX(0)' : 'translateX(100px)',
-                opacity: isOpen ? 1 : 0,
-                transition: `transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${navLinks.length * 100 + 200}ms, 
-                             opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${navLinks.length * 100 + 200}ms`
-              }}
             >
               <h2 className="text-lg md:text-xl font-medium text-white mb-4">
                 What we bring to the table:
               </h2>
               <ul className="space-y-2">
-                {services.map((service, index) => (
-                  <li 
-                    key={service} 
+                {services.map((service) => (
+                  <li
+                    key={service}
                     className="text-white/80 text-sm"
-                    style={{
-                      transitionDelay: `${navLinks.length * 100 + 300 + (index * 50)}ms`,
-                      transform: isOpen ? 'translateX(0)' : 'translateX(50px)',
-                      opacity: isOpen ? 1 : 0,
-                      transition: `transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${navLinks.length * 100 + 300 + (index * 50)}ms, 
-                                   opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${navLinks.length * 100 + 300 + (index * 50)}ms`
-                    }}
                   >
                     {service}
                   </li>
@@ -168,29 +157,15 @@ export default function Navbar() {
 
             {/* Tools Section */}
             <div className="w-full mb-10 overflow-hidden"
-              style={{
-                transitionDelay: `${navLinks.length * 100 + 500}ms`,
-                transform: isOpen ? 'translateX(0)' : 'translateX(100px)',
-                opacity: isOpen ? 1 : 0,
-                transition: `transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${navLinks.length * 100 + 500}ms, 
-                             opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${navLinks.length * 100 + 500}ms`
-              }}
             >
               <h2 className="text-lg md:text-xl font-medium text-white mb-4">
                 Tools:
               </h2>
               <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {tools.map((tool, index) => (
-                  <li 
-                    key={tool} 
+                {tools.map((tool) => (
+                  <li
+                    key={tool}
                     className="text-white/70 text-sm"
-                    style={{
-                      transitionDelay: `${navLinks.length * 100 + 600 + (index * 30)}ms`,
-                      transform: isOpen ? 'translateX(0)' : 'translateX(50px)',
-                      opacity: isOpen ? 1 : 0,
-                      transition: `transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${navLinks.length * 100 + 600 + (index * 30)}ms, 
-                                   opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${navLinks.length * 100 + 600 + (index * 30)}ms`
-                    }}
                   >
                     {tool}
                   </li>

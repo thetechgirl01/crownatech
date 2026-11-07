@@ -45,9 +45,7 @@ const PublicShell = ({ children }) => (
     <Navbar />
     {children}
     <Bookcall />
-    <div className="px-9 rounded-tr-3xl rounded-tl-3xl">
-      <Footer />
-    </div>
+    <Footer />
   </>
 );
 
