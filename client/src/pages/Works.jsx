@@ -56,13 +56,13 @@ const Works = () => {
     <div className="min-h-screen ct-page-content">
       <SEO
         title="Works"
-        description="Selected projects from CrownaTech — websites, ecommerce platforms, brand systems, and more."
+        description="Selected projects from CrownaTech. websites, ecommerce platforms, brand systems, and more."
       />
 
       <div className="ct-container">
       <header className="mb-12 sm:mb-16">
         <h1 className="ct-page-heading text-white font-bold leading-tight max-w-5xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-1 bg">
-          We help businesses achieve their goals. By solving real, meaningful problems.
+          We help businesses achieve their goals.<br /><span className="ct-heading-secondary">By solving real, meaningful problems.</span>
         </h1>
       </header>
 

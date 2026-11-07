@@ -447,7 +447,7 @@ const ProjectForm = () => {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="block text-white/70 text-sm">
-                Gallery (multiple — pick as many as you like)
+                Gallery (multiple. pick as many as you like)
               </label>
               <span className="text-muted text-xs">
                 {existingGallery.length + galleryFiles.length} image
@@ -513,7 +513,7 @@ const ProjectForm = () => {
               />
             </label>
             <p className="text-muted text-xs mt-2">
-              Pick multiple at once, or click again to add more — each click appends to the list.
+              Pick multiple at once, or click again to add more. each click appends to the list.
             </p>
           </div>
         </section>

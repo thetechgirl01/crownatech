@@ -957,3 +957,26 @@ form label { font-size: .875rem; font-weight: 500; }
 .ct-carousel-dot { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 999px; }
 .ct-carousel-dot:hover { background: rgb(255 255 255 / 6%); }
 @media (prefers-reduced-motion: reduce) { .case-study-hero, .full-width-image-block { background-attachment: scroll; } }
+
+/* Refinement: one pill language, contrasting icon coins and intentional navy roles. */
+@theme { --color-brand: var(--brand-blue); --color-surface: var(--surface); }
+:root { --button-icon-size: 2rem; --color-black: #0a0a0a; }
+.ct-panel-brand { background: var(--brand-blue); }
+.ct-heading-secondary { color: var(--text-muted); }
+.ct-button-dark { background: var(--brand-blue); color: #fff; }
+.ct-button-dark:hover { background: var(--surface); color: #fff; }
+.ct-button:has(> svg), .ct-button:has(> span > svg) { min-height: 3rem; padding: .5rem .6rem .5rem 1.25rem; }
+.ct-button > svg, .ct-button > span:has(> svg) { width: var(--button-icon-size); height: var(--button-icon-size); flex: 0 0 var(--button-icon-size); border-radius: 50%; }
+.ct-button > svg { padding: .45rem; }
+.ct-button:not(.ct-button-tertiary) > svg, .ct-button:not(.ct-button-tertiary) > span:has(> svg) { background: #0a0a0a; color: #fff; }
+.ct-button > span > svg { width: 1rem; height: 1rem; color: inherit; }
+.ct-button-dark > svg, .ct-button-dark > span:has(> svg) { background: var(--brand-gold) !important; color: #0a0a0a !important; }
+.ct-button-tertiary > svg { padding: .25rem; background: transparent; color: inherit; }
+.ct-about-copy { grid-row: 1; }
+@media (min-width: 64rem) { .ct-about-copy { grid-column: 2; } .ct-about-preview > :last-child { grid-column: 1; grid-row: 1; } }
+.ct-about-story { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); padding-bottom: var(--section-space); }
+.ct-about-story figure { max-width: 30rem; }
+.ct-editorial-section { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(2rem, 6vw, 6rem); padding-block: var(--section-space); border-top: 1px solid var(--border); }
+.ct-editorial-list > li, .ct-editorial-row { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 1rem; padding-block: 1.75rem; border-bottom: 1px solid var(--border); }
+.ct-editorial-list > :first-child { padding-top: 0; }
+@media (max-width: 47.99rem) { .ct-about-story, .ct-editorial-section { grid-template-columns: 1fr; } .ct-about-story figure { max-width: 24rem; } }

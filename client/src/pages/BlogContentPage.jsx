@@ -377,7 +377,7 @@ const BlogContentPage = () => {
                       className="w-full h-full object-cover  transition-transform duration-200"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-white/30 text-sm">
+                    <div className="w-full h-full flex items-center justify-center text-muted text-sm">
                       No image
                     </div>
                   )}

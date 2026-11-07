@@ -1,3 +1,4 @@
+import { HiArrowUpRight } from 'react-icons/hi2';
 import { FaFacebook, FaLinkedin, FaTiktok } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/tklogo.png';
@@ -14,9 +15,9 @@ const Contact = () => (
         <h2 className="ct-section-title text-white">Connect with us</h2>
         <p className="text-muted max-w-xl mt-4">Follow for updates, insights, and behind-the-scenes looks at our latest projects.</p>
       </div>
-      <Link to="/contact" className="ct-button ct-button-secondary">Let's talk</Link>
+      <Link to="/contact" className="ct-button ct-button-secondary">Let's talk <HiArrowUpRight aria-hidden="true" /></Link>
     </header>
-    <div className="ct-panel grid lg:grid-cols-2 overflow-hidden">
+    <div className="ct-panel ct-panel-brand grid lg:grid-cols-2 overflow-hidden">
       <div className="p-6 sm:p-10">
         <h3 className="text-white text-xl font-semibold mb-6">Find us on social media</h3>
         <div className="grid grid-cols-3 gap-3 sm:gap-4">

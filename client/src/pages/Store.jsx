@@ -40,10 +40,10 @@ const Store = () => {
       <div className="ct-container">
         <header className="mb-14">
           <h1 className="ct-page-heading text-white font-bold leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4">
-            Ready-to-launch templates &amp; scripts
+            Ready-to-launch templates.<br /><span className="ct-heading-secondary">Scripts for your next project.</span>
           </h1>
           <p className="text-white/70 text-base sm:text-lg md:text-xl max-w-3xl">
-            Pick up the same production-grade builds we ship for clients — fully responsive,
+            Pick up the same production-grade builds we ship for clients. fully responsive,
             performance-tuned, and ready to deploy.
           </p>
         </header>

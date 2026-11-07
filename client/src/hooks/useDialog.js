@@ -19,7 +19,7 @@ export default function useDialog(open, onClose, dialogRef) {
     const focusable = () => Array.from(dialog.querySelectorAll(
       'a[href], button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), [tabindex="0"]'
     )).filter(el => el.getClientRects().length && !el.closest('[inert]'));
-    (focusable()[0] || dialog).focus({ preventScroll: true });
+    (dialog.querySelector('[data-dialog-initial-focus="true"]') || focusable()[0] || dialog).focus({ preventScroll: true });
     const onKey = event => {
       if (event.key === 'Escape') {
         event.preventDefault();

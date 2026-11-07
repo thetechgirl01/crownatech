@@ -196,7 +196,7 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
           message={
             search.trim()
               ? `Nothing matches "${search}". Try a different search.`
-              : 'Check back soon — new stories are on the way.'
+              : 'Check back soon. new stories are on the way.'
           }
         />
       ) : (
@@ -228,7 +228,7 @@ const Blogs = ({ blogs: external, showFilters = true }) => {
 };
 
 /* ------------------------------------------------------------
-   Blog card — large image, category chip overlay, title, date
+   Blog card. large image, category chip overlay, title, date
    ------------------------------------------------------------ */
 const BlogCard = ({ post }) => {
   const cover = post.coverImage?.url;
@@ -245,7 +245,7 @@ const BlogCard = ({ post }) => {
               className="w-full h-full object-cover transition-transform duration-200 ease-out"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-white/30 text-sm">
+            <div className="w-full h-full flex items-center justify-center text-muted text-sm">
               No image
             </div>
           )}
@@ -286,7 +286,7 @@ const BlogCard = ({ post }) => {
 };
 
 /* ------------------------------------------------------------
-   Newsletter strip (purely visual — wire up later if you want)
+   Newsletter strip (purely visual. wire up later if you want)
    ------------------------------------------------------------ */
 const NewsletterStrip = () => (
   <section className="mt-20 pt-10 border-t border-white/10 grid gap-8 md:grid-cols-2">

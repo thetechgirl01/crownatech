@@ -77,7 +77,7 @@ const Contact = () => {
         open={showSuccess}
         onClose={() => setShowSuccess(false)}
         title="Message received"
-        message="Thanks for reaching out — we'll be in touch shortly."
+        message="Thanks for reaching out. we'll be in touch shortly."
       />
 
       {/* HEADER SECTION - Same as Hero.jsx */}
@@ -91,7 +91,7 @@ const Contact = () => {
                 text-3xl sm:text-4xl md:text-5xl lg:text-6xl
                 mb-6
               ">
-                Let's Build Something Amazing
+                Let's build something amazing.<br /><span className="ct-heading-secondary">Tell us what you have in mind.</span>
               </h1>
 
               <p className="
@@ -108,7 +108,7 @@ const Contact = () => {
       </div>
 
       {/* MAIN CONTENT */}
-      <section className='bg-gray-900/95 ct-section rounded-tl-3xl rounded-tr-3xl'>
+      <section className='bg-brand ct-section rounded-tl-3xl rounded-tr-3xl'>
         <div className="ct-container">
         <div className="flex flex-col-reverse lg:flex-row gap-8 lg:gap-12">
 
@@ -195,11 +195,11 @@ const Contact = () => {
             ">
               <div className="flex items-center gap-3 mb-6">
                 <FaMapMarkerAlt className="w-5 h-5 text-white" />
-                <h4 className="text-white font-medium">Our Location</h4>
+                <h4 className="text-white font-medium">How We Work</h4>
               </div>
               <p className="text-muted text-sm mb-4">
-                Lagos, Nigeria<br />
-                Available for worldwide projects
+                Working remotely<br />
+                Collaborating with clients globally
               </p>
 
               <div className="flex items-center gap-3 mb-4">

@@ -19,6 +19,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
+    { name: "Home", path: "/" },
     { name: "Works", path: "/works" },
     { name: "Store", path: "/store" },
     { name: "About Us", path: "/about" },
@@ -40,19 +41,19 @@ export default function Navbar() {
   ];
 
   return (
-    <>
+    <div ref={menuRef} role={isOpen ? "dialog" : undefined} aria-modal={isOpen ? true : undefined} aria-label={isOpen ? "Site navigation" : undefined} tabIndex={isOpen ? -1 : undefined}>
       {/* NAVBAR - Fixed with highest z-index */}
       <nav
         className={`fixed w-full z-[100] transition-colors duration-200 ${
           scrolled
-            ? "bg-[#011936]/95 backdrop-blur-sm border-b border-white/10 text-white"
-            : "bg-[#011936]/80 text-white backdrop-blur-sm"
+            ? "bg-brand/95 backdrop-blur-sm border-b border-white/10 text-white"
+            : "bg-brand/80 text-white backdrop-blur-sm"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Link to='/'>
+            <Link to='/' onClick={() => setIsOpen(false)} aria-label="Crownatech home">
             <div className="flex-shrink-0 w-10 h-10">
               <img src={Tklogo} alt="crownatech Logo" />
             </div>
@@ -107,20 +108,15 @@ export default function Navbar() {
       {/* Slide-out navigation */}
       <aside
         id="site-menu"
-        ref={menuRef}
         inert={!isOpen}
-        role="dialog"
-        aria-modal={isOpen ? true : undefined}
-        aria-label="Site navigation"
         tabIndex={-1}
-        className={`ct-menu fixed top-0 right-0 h-dvh z-[95] bg-[#011936]
+        className={`ct-menu fixed top-0 right-0 h-dvh z-[95] bg-brand
           transition-transform duration-200 ease-out
           ${isOpen ? "translate-x-0" : "translate-x-full"}
           w-full md:w-[min(28rem,50vw)]
           overflow-y-auto overflow-x-hidden`}
       >
         <div className="min-h-full flex flex-col items-start px-6 sm:px-8 py-24">
-          <button className="ct-button ct-button-tertiary mb-8" onClick={() => setIsOpen(false)}>Close navigation</button>
           {/* Navigation Links */}
           <div className="w-full mx-auto">
             <ul className="space-y-6 md:space-y-8 w-full mb-12">
@@ -128,6 +124,7 @@ export default function Navbar() {
                 <li key={link.name} className="overflow-hidden">
                   <Link
                     to={link.path}
+                    data-dialog-initial-focus={link.path === "/" ? "true" : undefined}
                     onClick={() => setIsOpen(false)}
                     className="block py-1 text-2xl md:text-3xl font-light text-white hover:text-yellow-400 transition-colors duration-200"
                   >
@@ -175,6 +172,6 @@ export default function Navbar() {
           </div>
         </div>
       </aside>
-    </>
+    </div>
   );
 }

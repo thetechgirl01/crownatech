@@ -1,18 +1,9 @@
-import React from 'react';
-import { FaRocket, FaUsers, FaAward, FaLightbulb } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { HiArrowUpRight } from 'react-icons/hi2';
+import Portrait from '../assets/director.jpg';
+import SEO from '../components/common/SEO';
 
-// Register ScrollTrigger plugin
-
-const AboutUs = () => {
-
-  const stats = [
-    { icon: <FaRocket className="w-6 h-6" />, value: "100+", label: "Projects Delivered" },
-    { icon: <FaUsers className="w-6 h-6" />, value: "50+", label: "Happy Clients" },
-    { icon: <FaAward className="w-6 h-6" />, value: "5+", label: "Years Experience" },
-    { icon: <FaLightbulb className="w-6 h-6" />, value: "24/7", label: "Support Available" }
-  ];
-
-  const services = [
+const services = [
     {
       title: "Custom Web Development",
       description: "Tailored web applications built with modern technologies to meet your specific business needs."
@@ -27,7 +18,7 @@ const AboutUs = () => {
     }
   ];
 
-  const process = [
+const process = [
     {
       step: "01",
       title: "Discovery & Planning",
@@ -50,272 +41,52 @@ const AboutUs = () => {
     }
   ];
 
-  return (
-    <div className="min-h-screen">
-
-      {/* HERO SECTION - Same as Hero.jsx */}
-      <div className="ct-page-header">
-        <section className="ct-container">
-          <div className="w-full">
-            <div className="about-header flex flex-col items-start text-left">
-
-              <h1 className="ct-page-heading
-                text-white font-bold leading-tight
-                text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-                mb-6
-              ">
-                Building Digital Excellence
-              </h1>
-
-              <p className="
-                text-white/70
-                text-base sm:text-lg md:text-xl
-                leading-relaxed max-w-3xl mb-12
-              ">
-                We are a passionate team of web developers and designers dedicated to creating
-                exceptional digital experiences. Based in Lagos, Nigeria, we serve clients
-                worldwide with cutting-edge web solutions.
-              </p>
-
-              {/* STATS GRID */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-                {stats.map((stat, index) => (
-                  <div
-                    key={index}
-                    className="stat-card"
-                  >
-                    <div className="
-                      backdrop-blur-xl bg-white/5
-                      border border-white/10
-                      rounded-xl
-                      p-6
-                      text-center
-                      transition-all duration-300
-                      hover:bg-white/10
-                    ">
-                      <div className="
-                        w-12 h-12
-                        bg-white
-                        rounded-xl
-                        flex items-center justify-center
-                        mx-auto mb-4
-                      ">
-                        <div className="text-black">
-                          {stat.icon}
-                        </div>
-                      </div>
-                      <div className="text-white text-2xl font-bold">
-                        {stat.value}
-                      </div>
-                      <div className="text-muted text-sm mt-1">
-                        {stat.label}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+const AboutUs = () => (
+  <div className="ct-container ct-page-content">
+    <SEO title="About" description="Crownatech combines creative thinking and technical expertise to build digital experiences for businesses and startups. Working remotely with clients worldwide." />
+    <header className="mb-12 sm:mb-20">
+      <h1 className="ct-page-heading text-white">Building digital excellence.<br /><span className="ct-heading-secondary">With strategy, design, and code.</span></h1>
+    </header>
+    <section className="ct-about-story" aria-labelledby="about-story-title">
+      <figure>
+        <img src={Portrait} alt="Crownatech studio portrait" width="640" height="800" className="w-full aspect-[4/5] object-cover rounded-3xl" />
+      </figure>
+      <div>
+        <p className="ct-eyebrow mb-4">The studio</p>
+        <h2 id="about-story-title" className="ct-section-title text-white mb-6">Creative thinking.<br />Technical craft.</h2>
+        <p className="text-muted text-lg mb-6">We are a passionate team of web developers and designers dedicated to creating exceptional digital experiences. We work remotely with businesses and startups, combining technical expertise with creative thinking.</p>
+        <p className="text-muted mb-6">Every project is treated as a partnership, with clear communication and transparent processes from start to finish.</p>
+        <p className="text-muted mb-8">Our commitment to quality and attention to detail helps us deliver solutions that are scalable, maintainable, and aligned with your long-term business goals.</p>
+        <Link to="/works" className="ct-button ct-button-primary">Explore our work <HiArrowUpRight aria-hidden="true" /></Link>
       </div>
-
-      {/* REST OF THE CONTENT - Full width */}
-      <div className="ct-container">
-
-        {/* OUR APPROACH SECTION */}
-        <section className="mb-16 md:mb-24">
-          <div className="mb-8">
-            <h2 className="
-              text-white
-              text-2xl sm:text-3xl md:text-4xl font-bold
-              mb-4
-            ">
-              Our Approach
-            </h2>
-            <p className="
-              text-white/70
-              text-base sm:text-lg
-              max-w-3xl
-            ">
-              We follow a structured process to ensure every project meets the highest standards of quality and delivers real value.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {process.map((item, index) => (
-              <div
-                key={index}
-                className="
-                  backdrop-blur-xl bg-white/5
-                  border border-white/10
-                  rounded-xl
-                  p-6
-                  transition-all duration-300
-                  hover:bg-white/10
-                "
-              >
-                <div className="
-                  text-white text-3xl font-bold
-                  mb-4
-                  opacity-60
-                ">
-                  {item.step}
-                </div>
-                <h3 className="
-                  text-white
-                  text-xl font-bold
-                  mb-3
-                ">
-                  {item.title}
-                </h3>
-                <p className="
-                  text-muted
-                  text-sm leading-relaxed
-                ">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* SERVICES SECTION */}
-        <section className="mb-16 md:mb-24">
-          <div className="mb-8">
-            <h2 className="
-              text-white
-              text-2xl sm:text-3xl md:text-4xl font-bold
-              mb-4
-            ">
-              What We Offer
-            </h2>
-            <p className="
-              text-white/70
-              text-base sm:text-lg
-              max-w-3xl
-            ">
-              Comprehensive web solutions tailored to your business objectives.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="
-                  backdrop-blur-xl bg-white/5
-                  border border-white/10
-                  rounded-xl
-                  p-6
-                  transition-all duration-300
-                  hover:bg-white/10
-                "
-              >
-                <h3 className="
-                  text-white
-                  text-xl font-bold
-                  mb-4
-                ">
-                  {service.title}
-                </h3>
-                <p className="
-                  text-muted
-                  text-sm leading-relaxed
-                ">
-                  {service.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* WHY CHOOSE US SECTION */}
-        <section className="mb-16 md:mb-24">
-          <div className="
-            backdrop-blur-xl bg-white/5
-            border border-white/10
-            rounded-2xl
-            p-6 sm:p-8 md:p-12
-          ">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="
-                w-12 h-12
-                bg-white
-                rounded-lg
-                flex items-center justify-center
-              ">
-                <FaLightbulb className="w-6 h-6 text-black" />
-              </div>
-              <h2 className="
-                text-white
-                text-2xl sm:text-3xl font-bold
-              ">
-                Why Choose CrownTech
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div>
-                <p className="
-                  text-white/70
-                  text-base sm:text-lg
-                  leading-relaxed mb-6
-                ">
-                  We combine technical expertise with creative thinking to deliver solutions that not only look great but perform exceptionally. Every project is treated as a partnership, with clear communication and transparent processes from start to finish.
-                </p>
-
-                <p className="
-                  text-white/70
-                  text-base sm:text-lg
-                  leading-relaxed
-                ">
-                  Our commitment to quality and attention to detail ensures that we deliver solutions that are scalable, maintainable, and aligned with your long-term business goals.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="
-                  p-4
-                  backdrop-blur-xl bg-white/5
-                  border border-white/10
-                  rounded-xl
-                ">
-                  <h4 className="text-white font-bold mb-2">Technical Excellence</h4>
-                  <p className="text-muted text-sm">
-                    Clean code, modern frameworks, and scalable architecture
-                  </p>
-                </div>
-
-                <div className="
-                  p-4
-                  backdrop-blur-xl bg-white/5
-                  border border-white/10
-                  rounded-xl
-                ">
-                  <h4 className="text-white font-bold mb-2">Client-Focused</h4>
-                  <p className="text-muted text-sm">
-                    Your goals are our priority, with regular updates and collaboration
-                  </p>
-                </div>
-
-                <div className="
-                  p-4
-                  backdrop-blur-xl bg-white/5
-                  border border-white/10
-                  rounded-xl
-                ">
-                  <h4 className="text-white font-bold mb-2">Quality Assurance</h4>
-                  <p className="text-muted text-sm">
-                    Rigorous testing and quality checks at every stage
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+    </section>
+    <section className="ct-editorial-section" aria-labelledby="about-approach-title">
+      <div>
+        <p className="ct-eyebrow mb-4">Our approach</p>
+        <h2 id="about-approach-title" className="ct-section-title text-white">A clear process.<br />A shared direction.</h2>
+        <p className="text-muted mt-5">A structured process keeps every project focused on quality and real value.</p>
       </div>
-    </div>
-  );
-};
-
+      <ol className="ct-editorial-list">
+        {process.map(item => <li key={item.step}>
+          <span className="text-yellow-400 text-sm" aria-hidden="true">{item.step}</span>
+          <div><h3 className="text-white text-lg sm:text-xl mb-3">{item.title}</h3><p className="text-muted">{item.description}</p></div>
+        </li>)}
+      </ol>
+    </section>
+    <section className="ct-editorial-section" aria-labelledby="about-services-title">
+      <div>
+        <p className="ct-eyebrow mb-4">What we offer</p>
+        <h2 id="about-services-title" className="ct-section-title text-white">Built around<br />your business.</h2>
+        <p className="text-muted mt-5">Clean code, thoughtful design, and regular collaboration.</p>
+      </div>
+      <div className="ct-editorial-list">
+        {services.map((service, index) => <div key={service.title} className="ct-editorial-row">
+          <span className="text-yellow-400 text-sm" aria-hidden="true">0{index + 1}</span>
+          <div><h3 className="text-white text-lg sm:text-xl mb-3">{service.title}</h3><p className="text-muted">{service.description}</p></div>
+        </div>)}
+        <Link to="/contact" className="ct-button ct-button-secondary mt-6">Talk to us <HiArrowUpRight aria-hidden="true" /></Link>
+      </div>
+    </section>
+  </div>
+);
 export default AboutUs;

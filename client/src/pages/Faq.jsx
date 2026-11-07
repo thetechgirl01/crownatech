@@ -42,7 +42,7 @@ const FAQ = () => (
     <SEO title="FAQ" description="Answers to common questions about Crownatech's web design and development services." />
     <header className="mb-12 sm:mb-16">
       <p className="ct-eyebrow mb-4">Frequently asked</p>
-      <h1 className="ct-page-heading text-white">Questions answered</h1>
+      <h1 className="ct-page-heading text-white">Questions answered.<br /><span className="ct-heading-secondary">Clarity before we begin.</span></h1>
       <p className="text-muted text-lg max-w-2xl mt-6">Get quick answers to the most common questions about our web development services.</p>
     </header>
     <section className="max-w-4xl" aria-label="Frequently asked questions">

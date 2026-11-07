@@ -11,7 +11,7 @@ const SITE_NAME = 'CrownaTech';
 const DEFAULT_DESC =
   'CrownaTech is a creative web design & development studio building software solutions for businesses and startups with taste.';
 const DEFAULT_KEYWORDS =
-  'crownatech, web design Nigeria, web development Lagos, software agency, mern stack, react developer';
+  'crownatech, remote web design, web development, software agency, mern stack, react developer';
 
 const SEO = ({
   title,

@@ -30,9 +30,9 @@ const Footer = () => (
           </Link>
           <p className="mt-4 text-muted max-w-sm">
             We design and build digital products that earn attention and convert it.
-            Based in Lagos, working worldwide.
+            Working remotely with clients worldwide.
           </p>
-          <p className="mt-5 text-muted text-sm">Lagos, Nigeria · Remote</p>
+          <p className="mt-5 text-muted text-sm">Remote-first. Built around collaboration.</p>
         </div>
         <nav aria-label="Footer navigation">
           <h3 className="ct-footer-label">Explore</h3>

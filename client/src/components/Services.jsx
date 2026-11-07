@@ -74,7 +74,7 @@ const ServicesPage = () => {
             “Excellence is not an act, but a habit. It is achieved through discipline,
             precision, and a commitment to doing things right even when no one is watching.”
             <span className="block mt-2 text-muted text-xs sm:text-sm">
-              — Inspired by Aristotle
+             . Inspired by Aristotle
             </span>
           </p>
         </div>

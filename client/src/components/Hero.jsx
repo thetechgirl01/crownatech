@@ -1,4 +1,4 @@
-import { HiArrowRight } from 'react-icons/hi';
+import { HiArrowUpRight } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 
 export const Hero = () => (
@@ -12,8 +12,8 @@ export const Hero = () => (
         A creative code studio focused on building software solutions for businesses and startups with taste.
       </p>
       <div className="flex flex-wrap gap-4 mt-8">
-        <Link to="/contact" className="ct-button ct-button-secondary">Let's talk <HiArrowRight aria-hidden="true" className="-rotate-45" /></Link>
-        <Link to="/works" className="ct-button ct-button-tertiary">Works <HiArrowRight aria-hidden="true" className="-rotate-45" /></Link>
+        <Link to="/contact" className="ct-button ct-button-secondary">Let's talk <HiArrowUpRight aria-hidden="true" /></Link>
+        <Link to="/works" className="ct-button ct-button-tertiary">Works <HiArrowUpRight aria-hidden="true" /></Link>
       </div>
     </div>
   </section>

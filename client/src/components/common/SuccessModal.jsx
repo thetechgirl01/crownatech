@@ -27,7 +27,7 @@ const SuccessModal = ({ open, onClose, title = 'Success', message }) => {
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative w-full max-w-md bg-gray-900/95 border border-white/10 rounded-2xl p-8 backdrop-blur-xl text-center shadow-2xl">
+      <div className="relative w-full max-w-md bg-brand border border-white/10 rounded-2xl p-8 backdrop-blur-xl text-center shadow-2xl">
         <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-yellow-400 flex items-center justify-center">
           <HiCheck className="w-8 h-8 text-black" aria-hidden="true" />
         </div>

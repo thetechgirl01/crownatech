@@ -52,7 +52,7 @@ const AdminLayout = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 z-40 h-screen w-72 bg-gray-900/95 border-r border-white/10 backdrop-blur-xl
+        className={`fixed lg:sticky top-0 left-0 z-40 h-screen w-72 bg-brand border-r border-white/10 backdrop-blur-xl
           flex flex-col transition-transform duration-300 lg:translate-x-0 ${
             open ? 'translate-x-0' : '-translate-x-full'
           }`}
@@ -97,7 +97,7 @@ const AdminLayout = () => {
       {/* Main */}
       <div className="flex-1 min-w-0 flex flex-col">
         {/* Top bar (mobile menu trigger) */}
-        <header className="lg:hidden sticky top-0 z-20 bg-gray-900/95 border-b border-white/10 backdrop-blur-xl px-4 py-3 flex items-center justify-between">
+        <header className="lg:hidden sticky top-0 z-20 bg-brand border-b border-white/10 backdrop-blur-xl px-4 py-3 flex items-center justify-between">
           <button
             onClick={() => setOpen(true)}
             className="text-white"

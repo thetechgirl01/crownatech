@@ -38,14 +38,14 @@ const Home = () => {
       <SEO
         title="Creative Tech Solutions For Your Digital Success"
         description="CrownaTech delivers creative & innovative web solutions to help your business succeed in the digital world."
-        keywords="crownatech, crowna, tech, web dev in Nigeria, tech in nigeria, web design, web development, digital marketing, creative solutions"
+        keywords="crownatech, crowna, tech, remote web development, digital agency, web design, web development, digital marketing, creative solutions"
       />
 
       <div className="rounded-tr-3xl rounded-tl-3xl">
         <Hero />
       </div>
 
-      <div className="bg-gray-900/95 border border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="bg-brand border border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Services />
       </div>
 
@@ -53,7 +53,7 @@ const Home = () => {
         <About />
       </div>
 
-      <div className="bg-gray-900/95 border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="bg-brand border-t border-l border-r border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Projects />
       </div>
 
@@ -61,12 +61,12 @@ const Home = () => {
         <Workprocess />
       </div>
 
-      <div className="bg-[#011936] border border-white/20 rounded-tr-3xl rounded-tl-3xl">
+      <div className="bg-brand border border-white/20 rounded-tr-3xl rounded-tl-3xl">
         <Contact />
       </div>
 
       {recentBlogs.length > 0 && (
-        <div className="bg-gray-900/95 border border-white/20 rounded-tr-3xl rounded-tl-3xl"><div className="ct-container ct-section">
+        <div className="bg-brand border border-white/20 rounded-tr-3xl rounded-tl-3xl"><div className="ct-container ct-section">
           <h2 className="text-3xl text-white font-bold mb-6 text-center">
             Latest Blogs
           </h2>

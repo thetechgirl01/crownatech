@@ -1,6 +1,6 @@
 import React from 'react'
 import AboutPic from '../assets/director.jpg'
-import { HiArrowRight } from 'react-icons/hi'
+import { HiArrowUpRight } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
 
 const About = () => {
@@ -10,10 +10,10 @@ const About = () => {
       className="ct-container ct-section"
     >
       {/* MAIN GRID */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 sm:gap-20 items-center">
+      <div className="ct-about-preview grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center">
 
         {/* LEFT CONTENT */}
-        <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+        <div className="ct-about-copy text-right flex flex-col items-end">
           <h2
             className="ct-section-title
               text-black font-bold uppercase leading-tight
@@ -33,11 +33,11 @@ const About = () => {
             "
           >
             “Design is not just what it looks like and feels like. Design is how it works.
-            Every pixel placed, every interaction crafted, every line of code optimized —
+            Every pixel placed, every interaction crafted, every line of code optimized;
             we believe that true craftsmanship lives in the details that most people never notice,
             but everyone feels.”
             <span className="block mt-3 text-gray-600 text-xs sm:text-sm">
-              — Inspired by Steve Jobs
+             . Inspired by Steve Jobs
             </span>
           </p>
 
@@ -45,38 +45,16 @@ const About = () => {
           <div>
             <Link
                 to="/about"
-                className="
-                  group
-                  mt-6 sm:mt-10
-                  inline-flex items-center justify-between gap-3
-                  border border-black
-                  rounded-full
-                  px-4 sm:px-6 py-2 sm:py-3
-                  text-sm sm:text-base
-                  hover:bg-black/5
-                  transition
-                "
+                className="ct-button ct-button-dark mt-6 sm:mt-10"
               >
-                <span className="text-black font-medium">
-                  There's more to us
-                </span>
-
-                <span className="
-                  w-8 h-8 sm:w-9 sm:h-9
-                  bg-yellow-400
-                  rounded-full
-                  flex items-center justify-center
-
-                  transition
-                ">
-                  <HiArrowRight className="text-black w-4 h-4 sm:w-5 sm:h-5 -rotate-45" />
-                </span>
+                <span>There's more to us</span>
+                <HiArrowUpRight aria-hidden="true" />
             </Link>
           </div>
         </div>
 
         {/* RIGHT IMAGE SLICES */}
-        <div className="flex justify-center lg:justify-end gap-4 sm:gap-6">
+        <div role="img" aria-label="Crownatech studio portrait in three slices" className="flex justify-center lg:justify-end gap-4 sm:gap-6">
 
           {/* Slice 1 */}
           <div

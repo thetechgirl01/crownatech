@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { HiArrowRight } from 'react-icons/hi';
+import { HiArrowUpRight } from 'react-icons/hi2';
 import { MdLightbulb, MdDesignServices, MdCode, MdRocketLaunch } from 'react-icons/md';
 
 const steps = [
@@ -56,7 +56,7 @@ const Workprocess = () => (
         ))}
       </ol>
       <div className="mt-10 sm:mt-14">
-        <Link to="/contact" className="ct-button ct-button-primary">Start your project <HiArrowRight aria-hidden="true" /></Link>
+        <Link to="/contact" className="ct-button ct-button-primary">Start your project <HiArrowUpRight aria-hidden="true" /></Link>
       </div>
     </div>
   </section>
