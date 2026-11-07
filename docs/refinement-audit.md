@@ -45,3 +45,8 @@ Baseline: `ecdec28` on `main`, inspected against `f22964d`, `1f3efb2`, and `b3a8
 | 22: acceptance | Final: cross-page audit and documented limits; no homepage-only completion |
 
 Owner review remains required for legal identity/contact details, jurisdiction/legal basis, retention/deletion rules, hosting/storage regions, backup access/retention, vendor contracts and future purchase/refund/download terms. Dashboard-only scripts and provider cookies must be distinguished from repository evidence.
+
+## Batch verification
+
+- A: `1aa2eea` deployed successfully to Vercel Production; Render health passed. Live keyboard/logo, two-tone headers, icon contrast, directional About and overflow checks passed at 320/375/768/1440px. Tested missing-image contrast states were corrected. Lint remains at the prior 12 errors.
+- B: local checks passed for previous/next/dots/keyboard, resize boundaries, empty/single items, matching marquee group widths, pause control, static reduced-motion alternative, the restored 20-second consultation ring, unchanged 92px dialog bottom offset, Work cutout separation and exact 384px desktop stagger. Native reveals were checked for once-only execution, <=380ms duration, visible defaults and unavailable-API fallback. No new animation dependency was introduced. Await production verification before C.

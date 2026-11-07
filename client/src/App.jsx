@@ -1,4 +1,5 @@
-import React, { Suspense, lazy } from 'react';
+import usePageMotion from './hooks/usePageMotion';
+import React, { Suspense, lazy, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -40,15 +41,19 @@ const AdminContacts = lazy(() => import('./pages/admin/AdminContacts'));
  * The admin section uses its own AdminLayout, so we render those routes
  * without the public chrome.
  */
-const PublicShell = ({ children }) => (
+const PublicShell = ({ children }) => {
+  const contentRef = useRef(null);
+  usePageMotion(contentRef);
+  return (
   <>
     <a className="ct-skip-link" href="#main-content">Skip to content</a>
     <Navbar />
-    <main id="main-content" tabIndex={-1}>{children}</main>
+    <main id="main-content" ref={contentRef} tabIndex={-1}>{children}</main>
     <Bookcall />
     <Footer />
   </>
-);
+  );
+};
 
 const NotFound = () => (
   <div className="min-h-screen flex items-center justify-center px-6 pt-32 pb-20">

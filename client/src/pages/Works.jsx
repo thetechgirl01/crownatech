@@ -98,7 +98,7 @@ const Works = () => {
             message="Try a different filter or check back soon."
           />
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-24 sm:gap-y-24 md:gap-y-0 gap-y-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-24 gap-y-16 sm:gap-y-20 lg:gap-y-0">
             {filtered.map((work, index) => (
               <div key={work._id} className={index % 2 === 1 ? 'lg:mt-96' : ''}>
                 <ProjectCard project={work} />
@@ -109,7 +109,7 @@ const Works = () => {
                     {work.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs uppercase tracking-wide text-gray-500"
+                        className="text-xs uppercase tracking-wide text-muted"
                       >
                         {tag}
                       </span>
@@ -131,7 +131,7 @@ const Works = () => {
 
                 {/* Script badge if applicable */}
                 {work.scriptAvailable && (
-                  <span className="inline-block mt-4 px-3 py-1 text-xs mb-20 uppercase tracking-wide rounded-full bg-yellow-400/20 text-yellow-400">
+                  <span className="inline-block mt-4 px-3 py-1 text-xs uppercase tracking-wide rounded-full bg-yellow-400/20 text-yellow-400">
                     Script Available
                   </span>
                 )}
@@ -184,7 +184,7 @@ const ProjectCard = ({ project }) => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={isStock ? 'Buy script' : 'Visit live site'}
-          className="absolute top-2 right-2 w-20 h-14 sm:w-20 sm:h-12 md:w-24 md:h-14 lg:w-28 lg:h-16 rounded-lg bg-yellow-500 flex items-center justify-center shadow-lg  transition z-10"
+          className="ct-project-action"
         >
           <HiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-black" />
         </a>
@@ -192,7 +192,7 @@ const ProjectCard = ({ project }) => {
         <Link
           to={`/projects/${project.slug}`}
           aria-label="View project"
-          className="absolute top-2 right-2 w-20 h-14 sm:w-20 sm:h-12 md:w-24 md:h-14 lg:w-28 lg:h-16 rounded-lg bg-yellow-500 flex items-center justify-center shadow-lg  transition z-10"
+          className="ct-project-action"
         >
           <HiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-black" />
         </Link>

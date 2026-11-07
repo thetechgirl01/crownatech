@@ -10,7 +10,7 @@ const About = () => {
       className="ct-container ct-section"
     >
       {/* MAIN GRID */}
-      <div className="ct-about-preview grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center">
+      <div data-reveal className="ct-about-preview grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center">
 
         {/* LEFT CONTENT */}
         <div className="ct-about-copy text-right flex flex-col items-end">

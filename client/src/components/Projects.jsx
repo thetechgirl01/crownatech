@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import WebsiteTypes from './WebsiteTypes';
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { HiArrowUpRight } from "react-icons/hi2";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { projectsApi } from "../api/projects";
 import LazyImage from "./common/LazyImage";
 
-const websiteTypes = [
-  "E-commerce", "Portfolio", "Blog", "Landing Page",
-  "Corporate", "SaaS", "Web App", "Web3", "Real Estate",
-];
+
 
 /**
  * Home page "Real projects, real results" carousel.
@@ -18,6 +16,7 @@ const websiteTypes = [
 const Projects = () => {
   const scrollRef = useRef(null);
   const [active, setActive] = useState(0);
+  const [edges, setEdges] = useState({ previous: false, next: false });
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -53,7 +52,7 @@ const Projects = () => {
     carousel.scrollTo({ left, behavior: reducedMotion ? "auto" : "smooth" });
   };
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (!scrollRef.current) return;
     const carousel = scrollRef.current;
     const maxScroll = carousel.scrollWidth - carousel.clientWidth;
@@ -71,6 +70,31 @@ const Projects = () => {
       }
     });
     setActive(nearest);
+    const previous = carousel.scrollLeft > 2;
+    const next = carousel.scrollLeft < maxScroll - 2;
+    setEdges(current => current.previous === previous && current.next === next ? current : { previous, next });
+  }, []);
+
+  useEffect(() => {
+    const carousel = scrollRef.current;
+    if (!carousel) return;
+    const frame = requestAnimationFrame(handleScroll);
+    const observer = window.ResizeObserver ? new ResizeObserver(handleScroll) : null;
+    observer?.observe(carousel);
+    window.addEventListener('resize', handleScroll);
+    return () => { cancelAnimationFrame(frame); observer?.disconnect(); window.removeEventListener('resize', handleScroll); };
+  }, [loading, projects.length, handleScroll]);
+
+  const move = direction => {
+    const carousel = scrollRef.current;
+    if (!carousel?.children.length) return;
+    const firstLeft = carousel.children[0].getBoundingClientRect().left;
+    const max = Math.max(0, carousel.scrollWidth - carousel.clientWidth);
+    const targets = Array.from(carousel.children).map(card => Math.min(card.getBoundingClientRect().left - firstLeft, max));
+    const left = direction > 0
+      ? targets.find(target => target > carousel.scrollLeft + 2) ?? max
+      : targets.slice().reverse().find(target => target < carousel.scrollLeft - 2) ?? 0;
+    carousel.scrollTo({ left, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   };
 
   return (
@@ -90,27 +114,21 @@ const Projects = () => {
 
         {/* RIGHT — SKILLS + CARDS */}
         <div className="min-w-0 lg:w-2/3 relative">
-          {/* Animated skills strip */}
-          <div className="overflow-hidden mb-8">
-            <div className="flex flex-wrap gap-x-5 gap-y-3 uppercase text-muted text-xs">
-              {websiteTypes.map((type, i) => (
-                <span key={i} className="inline-flex items-center gap-2">
-                  {type}
-                  <span className="w-1 h-1 rounded-full bg-yellow-400" aria-hidden="true" />
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="hidden lg:flex absolute -left-6 top-1/2 -translate-y-1/2 text-gray-500">
-            <HiChevronLeft className="w-5 h-5" />
-          </div>
-          <div className="hidden lg:flex absolute -right-6 top-1/2 -translate-y-1/2 text-gray-500">
-            <HiChevronRight className="w-5 h-5" />
-          </div>
+          <WebsiteTypes />
 
           <div
             ref={scrollRef}
+            id="featured-projects"
+            role="region"
+            aria-label="Featured projects"
+            aria-roledescription="carousel"
+            tabIndex={0}
+            onKeyDown={event => {
+              if (event.target !== event.currentTarget) return;
+              if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+                event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1);
+              }
+            }}
             onScroll={handleScroll}
             className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6 hide-scrollbar"
           >
@@ -133,6 +151,10 @@ const Projects = () => {
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-4 mt-6">
+            <div className="flex gap-2" aria-label="Project carousel controls">
+              <button type="button" className="ct-icon-button" aria-label="Previous projects" aria-controls="featured-projects" disabled={loading || projects.length < 2 || !edges.previous} onClick={() => move(-1)}><HiChevronLeft aria-hidden="true" /></button>
+              <button type="button" className="ct-icon-button" aria-label="Next projects" aria-controls="featured-projects" disabled={loading || projects.length < 2 || !edges.next} onClick={() => move(1)}><HiChevronRight aria-hidden="true" /></button>
+            </div>
             {/* Pagination dots */}
             <div className="flex flex-wrap gap-1">
               {projects.map((_, i) => (
@@ -198,7 +220,7 @@ const ProjectCard = ({ project }) => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={project.kind === 'stock' ? 'Buy script' : 'Visit live site'}
-          className="absolute top-2 right-2 w-14 h-14 rounded-lg yellow flex items-center justify-center shadow-lg  transition z-10"
+          className="ct-project-action"
         >
           <HiArrowUpRight className="w-6 h-6 text-black" />
         </a>
@@ -206,7 +228,7 @@ const ProjectCard = ({ project }) => {
         <Link
           to={detailHref}
           aria-label="View project"
-          className="absolute top-2 right-2 w-14 h-14 rounded-lg yellow flex items-center justify-center shadow-lg  transition z-10"
+          className="ct-project-action"
         >
           <HiArrowUpRight className="w-6 h-6 text-black" />
         </Link>

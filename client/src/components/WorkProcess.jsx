@@ -34,10 +34,10 @@ const steps = [
 ];
 
 const Workprocess = () => (
-  <section className="ct-section">
+  <section className="ct-section" aria-labelledby="work-process-title">
     <div className="ct-container">
-      <header className="mb-10 sm:mb-14 max-w-3xl">
-        <h2 className="ct-section-title text-white">Our work process</h2>
+      <header id="work-process-introduction" data-reveal className="mb-10 sm:mb-14 max-w-3xl">
+        <h2 id="work-process-title" className="ct-section-title text-white">Our work process</h2>
         <p className="text-muted text-base sm:text-lg mt-5">A clear and simple 4-step process to ensure every project is delivered efficiently and with excellence.</p>
       </header>
       <ol className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">

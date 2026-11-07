@@ -46,7 +46,7 @@ const ServicesPage = () => {
   return (
     <div className="ct-container ct-section">
       {/* HERO */}
-      <header
+      <header data-reveal
         className=" mb-12 sm:mb-20"
       >
         <div className="flex flex-col lg:flex-row justify-between gap-8">

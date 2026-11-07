@@ -47,7 +47,7 @@ const AboutUs = () => (
     <header className="mb-12 sm:mb-20">
       <h1 className="ct-page-heading text-white">Building digital excellence.<br /><span className="ct-heading-secondary">With strategy, design, and code.</span></h1>
     </header>
-    <section className="ct-about-story" aria-labelledby="about-story-title">
+    <section data-reveal className="ct-about-story" aria-labelledby="about-story-title">
       <figure>
         <img src={Portrait} alt="Crownatech studio portrait" width="640" height="800" className="w-full aspect-[4/5] object-cover rounded-3xl" />
       </figure>

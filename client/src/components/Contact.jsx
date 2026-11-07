@@ -10,7 +10,7 @@ const SOCIALS = [
 ];
 const Contact = () => (
   <section className="ct-container ct-section">
-    <header className="mb-10 sm:mb-14 flex flex-wrap items-end justify-between gap-6">
+    <header data-reveal className="mb-10 sm:mb-14 flex flex-wrap items-end justify-between gap-6">
       <div>
         <h2 className="ct-section-title text-white">Connect with us</h2>
         <p className="text-muted max-w-xl mt-4">Follow for updates, insights, and behind-the-scenes looks at our latest projects.</p>

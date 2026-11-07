@@ -980,3 +980,36 @@ form label { font-size: .875rem; font-weight: 500; }
 .ct-editorial-list > li, .ct-editorial-row { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 1rem; padding-block: 1.75rem; border-bottom: 1px solid var(--border); }
 .ct-editorial-list > :first-child { padding-top: 0; }
 @media (max-width: 47.99rem) { .ct-about-story, .ct-editorial-section { grid-template-columns: 1fr; } .ct-about-story figure { max-width: 24rem; } }
+
+.ct-project-action { position: absolute; z-index: 10; top: .5rem; right: .5rem; width: clamp(2.75rem, 8vw, 3.5rem); aspect-ratio: 1; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: var(--brand-gold); }
+.ct-project-action > svg { width: calc(100% - 1rem); height: calc(100% - 1rem); padding: .4rem; border-radius: 50%; background: #0a0a0a; color: #fff; }
+.ct-project-action:hover { background: var(--brand-gold-hover); }
+.ct-types { display: flex; gap: .75rem; align-items: center; }
+.ct-types-window { overflow: hidden; min-width: 0; flex: 1; }
+.ct-types-track { display: flex; width: max-content; animation: ct-types-loop 36s linear infinite; }
+.ct-types-group { display: flex; align-items: center; gap: 2rem; padding-right: 2rem; flex-shrink: 0; }
+.ct-types-group > span { display: inline-flex; align-items: center; gap: 2rem; white-space: nowrap; color: var(--text-muted); font-size: .8125rem; }
+.ct-types-star { color: var(--brand-gold); font-size: 1.125rem; }
+.ct-types[data-paused="true"] .ct-types-track, .ct-types-window:hover .ct-types-track { animation-play-state: paused; }
+@keyframes ct-types-loop { to { transform: translateX(-50%); } }
+.ct-hero-wordmark { font-size: clamp(1.5rem, 3vw, 3rem); transform-origin: left center; }
+.ct-consult-widget { position: fixed; right: .5rem; bottom: .5rem; z-index: 40; width: 8rem; height: 8rem; display: grid; place-items: center; pointer-events: none; }
+.ct-consult-widget .ct-consult-trigger { position: relative; right: auto; bottom: auto; pointer-events: auto; }
+.ct-consult-ring { position: absolute; inset: 0; animation: spin-slow 20s linear infinite; pointer-events: none; }
+.ct-consult-light { background: #fff; border-color: rgb(0 0 0 / 12%); }
+.ct-consult-light .ct-eyebrow, .ct-consult-light .ct-icon-button { color: #111827; }
+.ct-consult-light .ct-icon-button { border-color: rgb(0 0 0 / 20%); }
+.ct-consult-light .ct-icon-button:hover { background: rgb(0 0 0 / 5%); }
+.ct-button-consult { background: #000; color: #fff; }
+.ct-button-consult:hover { background: #111827; color: #fff; }
+.ct-button-consult > svg { background: var(--brand-gold) !important; color: #000 !important; }
+@media (min-width: 48rem) { .ct-consult-widget { width: 9rem; height: 9rem; } }
+@media (prefers-reduced-motion: reduce) {
+  .ct-types-track { animation: none; display: block; width: auto; }
+  .ct-types-group { flex-wrap: wrap; gap: .75rem 1rem; padding-right: 0; }
+  .ct-types-group > span { gap: 1rem; white-space: normal; }
+  .ct-types-group[aria-hidden="true"], .ct-types-toggle { display: none; }
+  .ct-consult-ring { animation: none; }
+}
+/* Historical gray ring text keeps a navy edge when floating over light sections. */
+.ct-consult-ring text { paint-order: stroke fill; stroke: var(--brand-blue); stroke-width: .45px; stroke-linejoin: round; }
