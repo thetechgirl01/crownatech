@@ -36,7 +36,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg flex items-center justify-center px-4 py-12">
+    <div className="ct-admin min-h-screen bg flex items-center justify-center px-4 py-12">
       <SEO title="Admin Login" description="CrownaTech admin sign in" />
 
       <div className="w-full max-w-md">
@@ -100,7 +100,7 @@ const AdminLogin = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-3 bg-yellow-400 text-black font-semibold rounded-full hover:bg-yellow-500 transition disabled:opacity-60 disabled:cursor-not-allowed"
+            className="ct-button ct-button-primary w-full py-3 bg-yellow-400 text-black font-semibold rounded-full hover:bg-yellow-500 transition disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {submitting ? 'Signing in…' : 'Sign in'}
           </button>

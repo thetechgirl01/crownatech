@@ -103,6 +103,8 @@ const ProjectDetail = () => {
           <div className="mb-16 rounded-3xl overflow-hidden bg-white/5 border border-white/10">
             <LazyImage
               src={project.heroImage.url}
+              loading="eager"
+              fetchPriority="high"
               alt={project.heroImage.alt || project.title}
               className="w-full h-auto object-cover"
             />

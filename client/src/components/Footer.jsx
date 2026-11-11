@@ -3,6 +3,7 @@ import { HiArrowUpRight } from 'react-icons/hi2';
 import NewsletterSignup from './common/NewsletterSignup';
 
 const NAV = [
+  { label: 'Home', to: '/' },
   { label: 'Works', to: '/works' },
   { label: 'Store', to: '/store' },
   { label: 'About', to: '/about' },
@@ -49,7 +50,11 @@ const Footer = () => (
       </div>
       <div className="ct-footer-bottom">
         <p>© {new Date().getFullYear()} CrownaTech. All rights reserved.</p>
-        <Link to="/blogs" className="ct-footer-link">Read our latest articles <HiArrowUpRight aria-hidden="true" /></Link>
+        <nav aria-label="Footer resources and legal information" className="flex flex-wrap gap-x-6 gap-y-2">
+          <Link to="/blogs" className="ct-footer-link">Read our latest articles <HiArrowUpRight aria-hidden="true" /></Link>
+          <Link to="/privacy" className="ct-footer-link">Privacy Policy (draft)</Link>
+          <Link to="/privacy#cookies" className="ct-footer-link">Cookies &amp; storage</Link>
+        </nav>
       </div>
     </div>
   </footer>

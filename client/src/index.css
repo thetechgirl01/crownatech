@@ -1013,3 +1013,11 @@ form label { font-size: .875rem; font-weight: 500; }
 }
 /* Historical gray ring text keeps a navy edge when floating over light sections. */
 .ct-consult-ring text { paint-order: stroke fill; stroke: var(--brand-blue); stroke-width: .45px; stroke-linejoin: round; }
+.ct-legal-copy { max-width: 48rem; color: var(--text-muted); }
+.ct-legal-copy section { margin-block: 2.75rem; }
+.ct-legal-copy h2 { color: #fff; font-size: clamp(1.25rem, 3vw, 1.75rem); line-height: 1.35; margin-bottom: 1rem; }
+.ct-legal-copy p + p { margin-top: 1rem; }
+.ct-legal-copy ul { list-style: disc; padding-left: 1.25rem; margin-top: 1rem; }
+.ct-legal-copy li + li { margin-top: .75rem; }
+.ct-admin button:not(.ql-toolbar button):not(.ql-tooltip button) { border-radius: 999px; min-height: 3rem; }
+.ct-admin button:has(> svg:only-child):not(.ql-toolbar button) { min-width: 2.75rem; min-height: 2.75rem; display: inline-flex; align-items: center; justify-content: center; }

@@ -24,6 +24,8 @@ import FAQ from './pages/Faq';
 import BlogContentPage from './pages/BlogContentPage.jsx';
 import ProjectDetail from './pages/ProjectDetail.jsx';
 import Store from './pages/Store.jsx';
+import Privacy from './pages/Privacy';
+import SEO from './components/common/SEO';
 
 // Admin (lazy — keeps the public bundle small)
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
@@ -58,6 +60,7 @@ const PublicShell = ({ children }) => {
 const NotFound = () => (
   <div className="min-h-screen flex items-center justify-center px-6 pt-32 pb-20">
     <div className="text-center">
+      <SEO title="Page not found" description="This page could not be found. Return to Crownatech home." noIndex />
       <h1 className="text-white text-5xl font-bold mb-3">404</h1>
       <p className="text-muted mb-6">The page you're looking for doesn't exist.</p>
       <a href="/" className="text-yellow-400 hover:underline">← Back home</a>
@@ -108,6 +111,7 @@ const AppRoutes = () => {
         <Route path="/blog/:slug" element={<BlogContentPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PublicShell>

@@ -40,7 +40,7 @@ const AdminLayout = () => {
     }`;
 
   return (
-    <div className="min-h-screen bg flex text-white">
+    <div className="ct-admin min-h-screen bg flex text-white">
       {/* Mobile overlay */}
       {open && (
         <div
@@ -52,9 +52,10 @@ const AdminLayout = () => {
 
       {/* Sidebar */}
       <aside
+        id="admin-menu"
         className={`fixed lg:sticky top-0 left-0 z-40 h-screen w-72 bg-brand border-r border-white/10 backdrop-blur-xl
           flex flex-col transition-transform duration-300 lg:translate-x-0 ${
-            open ? 'translate-x-0' : '-translate-x-full'
+            open ? 'translate-x-0 visible' : '-translate-x-full invisible lg:visible'
           }`}
       >
         <div className="px-6 py-6 border-b border-white/10 flex items-center justify-between">
@@ -91,6 +92,7 @@ const AdminLayout = () => {
             <HiOutlineLogout className="w-5 h-5" />
             <span>Log out</span>
           </button>
+          <Link to="/privacy" className="ct-footer-link text-sm px-4">Privacy Policy draft</Link>
         </div>
       </aside>
 
@@ -102,6 +104,8 @@ const AdminLayout = () => {
             onClick={() => setOpen(true)}
             className="text-white"
             aria-label="Open menu"
+            aria-expanded={open}
+            aria-controls="admin-menu"
           >
             <HiOutlineMenu className="w-6 h-6" />
           </button>

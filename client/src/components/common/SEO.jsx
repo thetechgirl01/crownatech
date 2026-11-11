@@ -20,6 +20,7 @@ const SEO = ({
   image,
   url,
   type = 'website',
+  noIndex = false,
 }) => {
   const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} | Creative Web Solutions`;
   const canonical = url || (typeof window !== 'undefined' ? window.location.href : undefined);
@@ -27,6 +28,7 @@ const SEO = ({
   return (
     <Helmet>
       <title>{fullTitle}</title>
+      {noIndex && <meta name="robots" content="noindex" />}
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       {canonical && <link rel="canonical" href={canonical} />}

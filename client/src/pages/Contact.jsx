@@ -11,6 +11,7 @@ import {
 import { contactsApi } from '../api/contacts';
 import SuccessModal from '../components/common/SuccessModal';
 import SEO from '../components/common/SEO';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -420,7 +421,7 @@ const Contact = () => {
                 text-muted text-xs sm:text-sm
                 text-center mt-6
               ">
-                We respect your privacy. Your information is secure with us.
+                Read our <Link to="/privacy" className="underline">Privacy Policy draft</Link> for information about this form.
               </p>
             </form>
           </div>

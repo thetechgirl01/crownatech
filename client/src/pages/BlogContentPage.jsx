@@ -220,6 +220,8 @@ const BlogContentPage = () => {
           <div className="aspect-[16/9] rounded-3xl overflow-hidden bg-white/5 border border-white/10">
             <LazyImage
               src={post.coverImage.url}
+              loading="eager"
+              fetchPriority="high"
               alt={post.coverImage.alt || post.title}
               className="w-full h-full object-cover"
             />
